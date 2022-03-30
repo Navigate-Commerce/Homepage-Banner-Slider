@@ -1,5 +1,5 @@
 # Homepage-Banner-Slider
-Effortlessly create the multiple homepage banner sliders in the Magento 2 backend and display them on the homepage.
+Add multiple homepage banner sliders in the Magento 2 backend and display them on the homepage. This module will also allow you to upload separate image for mobile device.
 
 # Installation
 Run the following commands in your Magento 2 root directory:
