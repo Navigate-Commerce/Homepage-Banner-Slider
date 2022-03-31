@@ -1,0 +1,90 @@
+<?php
+$collection = $block->getSliderCollection();
+$slidercount = 0;
+$slidercount     = $collection->count();
+$mediaUrl = $block->getMediaUrl();
+if ($slidercount > 0) {
+    ?>
+<div class="main_home_slider_section">
+    <div class="main_home_slider owl-carousel owl-theme">
+        <?php foreach ($collection as $slider) { ?>
+        <div>
+            <div class="main_home_slider-img"
+            href="<?= ($slider->getUrlKey()) ? $slider->getUrlKey() : "javascript:void(0)" ?>" <?php if (!empty($slider->getUrlKey())) { ?> target="_blank" <?php } ?>>
+                
+                <picture>
+                    <source media="(min-width: 750px)" srcset="<?= $mediaUrl.$slider->getImagename() ?>">
+                    <source media="(max-width: 749px)" srcset="<?php
+                        $imageUrl='';
+                    if (strlen($slider->getMobileimagename())==0) {
+                        $imageUrl=$slider->getImagename();
+                    } else {
+                        $imageUrl=$slider->getMobileimagename();
+                    }
+                        
+                        echo $mediaUrl.$imageUrl; ?>">
+                    <img src="<?php
+                            $imageUrl='';
+                    if (strlen($slider->getMobileimagename())==0) {
+                        $imageUrl=$slider->getImagename();
+                    } else {
+                        $imageUrl=$slider->getMobileimagename();
+                    }
+                                    
+                        echo $mediaUrl.$imageUrl; ?>" alt="<?= $slider->getTitle() ?>" title="<?= $slider->getTitle() ?>" >
+                </picture>
+                <?php
+                     $f=0;
+                if ($slider->getSlidertitle()) {
+                    $f=1;
+                }
+
+                if ($slider->getButtontitle()) {
+                    $f=1;
+                }
+
+                if ($f==1) {
+                    ?>
+                <div class="main_home_slider-info" >
+                    <div class="main_home_slider-info-inner">
+                    <?php if ($slider->getSlidertitle()) { ?>
+                        <h3 class="main_home_slider-info-title"><?= $slider->getSlidertitle() ?></h3>
+                    <?php } ?>
+                    <?php
+                    if ($slider->getButtontitle()) {
+                        ?>
+
+                    <a href="<?= ($slider->getUrlKey()) ? $slider->getUrlKey() : "javascript:void(0)" ?>" <?php if (!empty($slider->getUrlKey())) { ?> target="_blank" <?php } ?> class="main_home_slider-info-button action"><?= $slider->getButtontitle() ?></a>
+
+                  <?php } ?>
+                    </div> 
+                </div>
+            <?php } ?>
+
+            </div>
+        </div>
+        <?php } ?>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    require(["jquery","navigate/bannerslider/owl.carousel"],function($) {
+        $('.main_home_slider').css('display', "block").owlCarousel({
+            loop: true,
+            responsiveClass:true,
+            nav: true,
+            dots:true,
+            items:1,
+            autoplay: true,
+            autoPlaySpeed: 10000,
+        });
+         window.dispatchEvent(new Event('resize'));
+    });
+</script>
+<?php } else { ?>
+<div class="message info empty">
+    <div><?php /* @escapeNotVerified */
+        echo __('We can\'t find banner slider matching the selection.') ?></div>
+</div>
+<?php } ?>

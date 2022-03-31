@@ -1,0 +1,21 @@
+{
+    "name": "navigate/module-banner-slider",
+    "description": "Home page banner slider by navigate",
+    "require": {
+        "php": "^7.1.0",
+        "navigate/core": "*",
+    },
+    "type": "magento2-module",
+    "version": "1.1.2",
+    "license": [
+        "Commercial"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Navigate\\HomepageBannerSlider\\": ""
+        }
+    }
+}
