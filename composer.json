@@ -3,7 +3,7 @@
     "description": "Home page banner slider by navigate",
     "require": {
         "php": "^7.1.0",
-        "navigate/core": "*",
+        "navigate/module-core": "^1.0.0"
     },
     "type": "magento2-module",
     "version": "1.1.2",
