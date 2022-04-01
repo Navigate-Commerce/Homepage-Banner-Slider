@@ -1,5 +1,5 @@
 # Navigate Commerce Homepage-Banner-Slider module for Magento 2
-Add multiple homepage banner sliders in the Magento 2 backend and display them on the homepage. This module will also allow you to upload separate image for mobile device.
+Add multiple homepage banner sliders in the Magento 2 backend and display them on the homepage.
 
 ## How to install Navigate_HomepageBannerSlider module
 
