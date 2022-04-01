@@ -3,7 +3,7 @@ Add multiple homepage banner sliders in the Magento 2 backend and display them o
 
 ## How to install Navigate_HomepageBannerSlider module
 
-### 1. composer Installation
+### Composer Installation
 
 Run the following command in Magento 2 root directory to install Navigate_HomepageBannerSlider module via composer.
 
@@ -23,19 +23,19 @@ php bin/magento setup:upgrade
 php bin/magento setup:static-content:deploy -f
 ```
 
-Run below command if your store in the production mode:
+Run below command if your store is in the production mode:
 
 ```
 php bin/magento setup:di:compile
 ```
 
-### 2. Manual Installation
+### Manual Installation
 
 If you prefer to install this module manually, kindly follow the steps described below - 
 
-- Download [the latest version here](https://github.com/navigatecommerce/magento-2-homepage-banner-slider/archive/refs/heads/main.zip) 
-- Extract `main.zip` file to `app/code/Navigate/HomepageBannerSlider` ; You should create a folder path `app/code/Navigate/HomepageBannerSlider` if not exist.
-- Go to Magento root directory and execute upgrade command to install `Navigate_HomepageBannerSlider`:
+- Download the latest version [here](https://github.com/navigatecommerce/magento-2-homepage-banner-slider/archive/refs/heads/main.zip) 
+- Create a folder path like this `app/code/Navigate/HomepageBannerSlider` and extract the `main.zip` file into it.
+- Navigate to Magento root directory and execute the below commands.
 
 ```
 php bin/magento setup:upgrade
