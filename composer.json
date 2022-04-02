@@ -2,7 +2,10 @@
     "name": "navigate/module-banner-slider",
     "description": "Homepage banner slider by navigate",
     "require": {
-        "navigate/module-core": "^1.0.0"
+        "php": "^7.1.0"
+    },
+    "require-dev":{
+        "navigate/module-core": "*@dev"
     },
     "type": "magento2-module",
     "license": "proprietary",
