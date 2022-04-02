@@ -5,6 +5,7 @@
         "navigate/module-core": "^1.0.0"
     },
     "type": "magento2-module",
+    "version": "1.0.1",
     "license": "proprietary",
     "authors": [
         {
