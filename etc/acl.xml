@@ -3,14 +3,14 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Navigate_Core::core">
+                <resource id="Navigate_Core::core" title="Navigate menu">
                     <resource id="Navigate_HomepageBannerSlider::bannerslider" title="Homepage Banner Slider" sortOrder="200"/>
                 </resource>
                 <resource id="Magento_Backend::stores">
                     <resource id="Magento_Backend::stores_settings">
                         <resource id="Magento_Config::config">
                             <resource id="Navigate_Core::config" title="Navigate Extension Settings" translate="title" sortOrder="100">
-                                <resource id="Navigate_HomepageBannerSlider::config_bannerslider" title="Homepage Banner Slider" translate="title" sortOrder="200" />
+                                <resource id="Navigate_HomepageBannerSlider::config_bannerslider" title="Homepage Banner Slider" translate="title" sortOrder="30" />
                             </resource>
                         </resource>
                     </resource>
