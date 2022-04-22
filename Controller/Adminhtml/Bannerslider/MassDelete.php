@@ -1,16 +1,20 @@
 <?php
+
 namespace Navigate\HomepageBannerSlider\Controller\Adminhtml\Bannerslider;
 
 class MassDelete extends \Magento\Backend\App\Action
 {
+
     /**
      * @var \Magento\Ui\Component\MassAction\Filter
      */
     protected $_filter;
+
     /**
      * @var \Navigate\HomepageBannerSlider\Model\ResourceModel\Bannerslider\CollectionFactory
      */
     protected $_collectionFactory;
+
 
     public function __construct(
         \Magento\Ui\Component\MassAction\Filter $filter,
@@ -20,23 +24,30 @@ class MassDelete extends \Magento\Backend\App\Action
         $this->_filter            = $filter;
         $this->_collectionFactory = $collectionFactory;
         parent::__construct($context);
-    }
+
+    }//end __construct()
+
 
     public function execute()
     {
         try {
-            $collection = $this->_filter->getCollection($this->_collectionFactory->create());
+            $collection  = $this->_filter->getCollection($this->_collectionFactory->create());
             $itemsDelete = 0;
             foreach ($collection as $item) {
                 $data = $item->getData();
                 $item->delete();
                 $itemsDelete++;
             }
+
             $this->messageManager->addSuccess(__('A total of %1 Bannerslider(s) were deleted successfully.', $itemsDelete));
         } catch (Exception $e) {
             $this->messageManager->addError('Something went wrong while deleting the Bannerslider '.$e->getMessage());
         }
+
         $resultRedirect = $this->resultRedirectFactory->create();
         return $resultRedirect->setPath('bannerslider/bannerslider/index');
-    }
-}
+
+    }//end execute()
+
+
+}//end class

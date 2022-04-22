@@ -7,14 +7,17 @@ use Magento\Framework\Controller\ResultFactory;
 
 class Delete extends \Magento\Backend\App\Action
 {
+
     /**
-     * @var bool
+     * @var boolean
      */
     protected $resultPageFactory = false;
+
     /**
      * @var \Magento\Framework\Message\ManagerInterface
      */
     protected $messageManager;
+
 
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
@@ -22,10 +25,12 @@ class Delete extends \Magento\Backend\App\Action
         BannersliderFactory $bannersliderFactory
     ) {
         parent::__construct($context);
-        $this->_resultFactory = $context->getResultFactory();
+        $this->_resultFactory      = $context->getResultFactory();
         $this->bannersliderFactory = $bannersliderFactory;
-        $this->messageManager = $messageManager;
-    }
+        $this->messageManager      = $messageManager;
+
+    }//end __construct()
+
 
     public function execute()
     {
@@ -36,16 +41,19 @@ class Delete extends \Magento\Backend\App\Action
                 $model->load($id);
                 $data = $model->getData();
                 $model->delete();
-                $this->messageManager->addSuccess(__("Bannerslider deleted successfully."));
+                $this->messageManager->addSuccess(__('Bannerslider deleted successfully.'));
             } catch (\Exception $e) {
                 $this->messageManager->addError('Something went wrong '.$e->getMessage());
             }
         } else {
             $this->messageManager->addError('Bannerslider not found, please try once more.');
         }
-        
+
         $resultRedirect = $this->_resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $resultRedirect->setPath('bannerslider/bannerslider/index');
         return $resultRedirect;
-    }
-}
+
+    }//end execute()
+
+
+}//end class

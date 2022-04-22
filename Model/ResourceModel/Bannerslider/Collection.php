@@ -6,7 +6,10 @@ use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
 class Collection extends AbstractCollection
 {
+
     protected $_idFieldName = 'id';
+
+
     /**
      * Initialize construct
      * Initialize Bannerslider models
@@ -17,5 +20,8 @@ class Collection extends AbstractCollection
             'Navigate\HomepageBannerSlider\Model\Bannerslider',
             'Navigate\HomepageBannerSlider\Model\ResourceModel\Bannerslider'
         );
-    }
-}
+
+    }//end _construct()
+
+
+}//end class

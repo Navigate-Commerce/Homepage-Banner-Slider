@@ -10,24 +10,29 @@ use Magento\Framework\Data\FormFactory;
 
 class Info extends Generic implements TabInterface
 {
+
+
     /**
      * Info constructor.
-     * @param Context $context
-     * @param Registry $registry
-     * @param FormFactory $formFactory
+     *
+     * @param Context                                            $context
+     * @param Registry                                           $registry
+     * @param FormFactory                                        $formFactory
      * @param \Magento\Framework\Session\SessionManagerInterface $coreSession
-     * @param array $data
+     * @param array                                              $data
      */
     public function __construct(
         Context $context,
         Registry $registry,
         FormFactory $formFactory,
         \Magento\Framework\Session\SessionManagerInterface $coreSession,
-        array $data = []
+        array $data=[]
     ) {
         $this->_coreSession = $coreSession;
         parent::__construct($context, $registry, $formFactory, $data);
-    }
+
+    }//end __construct()
+
 
     /**
      * @return Generic
@@ -36,7 +41,7 @@ class Info extends Generic implements TabInterface
     protected function _prepareForm()
     {
         $model = $this->_coreRegistry->registry('bannerslider');
-        $form = $this->_formFactory->create();
+        $form  = $this->_formFactory->create();
 
         $fieldset = $form->addFieldset(
             'base_fieldset',
@@ -51,104 +56,113 @@ class Info extends Generic implements TabInterface
         }
 
         $fieldset->addField(
-            "title",
+            'title',
             'text',
             [
-                'name' => 'title',
-                'label' => __('Title'),
-                'comment' => __('Title'),
+                'name'     => 'title',
+                'label'    => __('Title'),
+                'comment'  => __('Title'),
                 'required' => true,
             ]
         );
 
         $fieldset->addField(
-            "slidertitle",
+            'slidertitle',
             'text',
             [
-                'name' => 'slidertitle',
-                'label' => __('Slider Title'),
+                'name'    => 'slidertitle',
+                'label'   => __('Slider Title'),
                 'comment' => __('Slider Title'),
-                'note' => 'Display title on the image.'
-                
+                'note'    => 'Display title on the image.',
+
             ]
         );
 
         $fieldset->addField(
-            "buttontitle",
+            'buttontitle',
             'text',
             [
-                'name' => 'buttontitle',
-                'label' => __('Button Title'),
-                'comment' => __('Button Title')
+                'name'    => 'buttontitle',
+                'label'   => __('Button Title'),
+                'comment' => __('Button Title'),
             ]
         );
 
-
-         $fieldset->addField(
-             "url_key",
-             'text',
-             [
-                'name' => 'url_key',
-                'label' => __('Button Url Key'),
+        $fieldset->addField(
+            'url_key',
+            'text',
+            [
+                'name'    => 'url_key',
+                'label'   => __('Button Url Key'),
                 'comment' => __('Button Url Key'),
-                'class' => 'validate-url',
-                'note' => 'E.g : https://test.com/test.html'
-             ]
-         );
+                'class'   => 'validate-url',
+                'note'    => 'E.g : https://test.com/test.html',
+            ]
+        );
 
         $fieldset->addField(
-            "imagename",
+            'imagename',
             'image',
             [
-                'name' => 'imagename',
-                'label' => __('Desktop Image'),
-                'comment' => __('Image'),
+                'name'     => 'imagename',
+                'label'    => __('Desktop Image'),
+                'comment'  => __('Image'),
                 'required' => true,
-                'note' => 'Maximum file size: 2 MB. Allowed file types: jpg,jpeg,png'
+                'note'     => 'Maximum file size: 2 MB. Allowed file types: jpg,jpeg,png',
             ]
         );
 
-
         $fieldset->addField(
-            "mobileimagename",
+            'mobileimagename',
             'image',
             [
-                'name' => 'mobileimagename',
-                'label' => __('Mobile Image'),
+                'name'    => 'mobileimagename',
+                'label'   => __('Mobile Image'),
                 'comment' => __('Mobile Image'),
-                'note' => 'Maximum file size: 2 MB. Allowed file types: jpg,jpeg,png'
-                
+                'note'    => 'Maximum file size: 2 MB. Allowed file types: jpg,jpeg,png',
+
             ]
         );
 
         $fieldset->addField(
-            "status",
+            'status',
             'select',
             [
-                'name' => 'status',
-                'label' => __('Status'),
+                'name'    => 'status',
+                'label'   => __('Status'),
                 'comment' => __('Status'),
-                'values' =>  [['value' => 'Enabled', 'label' => 'Enabled'],['value' => 'Disabled', 'label' => 'Disabled']]
+                'values'  => [
+                    [
+                        'value' => 'Enabled',
+                        'label' => 'Enabled',
+                    ],
+                    [
+                        'value' => 'Disabled',
+                        'label' => 'Disabled',
+                    ],
+                ],
             ]
         );
 
         $fieldset->addField(
-            "position",
+            'position',
             'text',
             [
-                'name' => 'position',
-                'label' => __('Position'),
+                'name'    => 'position',
+                'label'   => __('Position'),
                 'comment' => __('Position'),
-                'class' => 'validate-number'
+                'class'   => 'validate-number',
             ]
         );
-        
+
         $data = $model->getData();
         $form->setValues($data);
         $this->setForm($form);
 
         return parent::_prepareForm();
-    }
+
+    }//end _prepareForm()
+
 
     /**
      * @return \Magento\Framework\Phrase|string
@@ -156,7 +170,9 @@ class Info extends Generic implements TabInterface
     public function getTabLabel()
     {
         return __('Bannerslider');
-    }
+
+    }//end getTabLabel()
+
 
     /**
      * @return \Magento\Framework\Phrase|string
@@ -164,21 +180,28 @@ class Info extends Generic implements TabInterface
     public function getTabTitle()
     {
         return __('Bannerslider');
-    }
+
+    }//end getTabTitle()
+
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function canShowTab()
     {
         return true;
-    }
+
+    }//end canShowTab()
+
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function isHidden()
     {
         return false;
-    }
-}
+
+    }//end isHidden()
+
+
+}//end class

@@ -1,4 +1,5 @@
 <?php
+
 namespace Navigate\HomepageBannerSlider\Ui\Component\Listing\Columns\Bannerslider;
 
 use Magento\Catalog\Helper\Image;
@@ -17,14 +18,15 @@ class Thumbnail extends Column
      */
     protected $storeManager;
 
+
     /**
-     * @param ContextInterface $context
-     * @param UiComponentFactory $uiComponentFactory
-     * @param Image $imageHelper
-     * @param UrlInterface $urlBuilder
+     * @param ContextInterface      $context
+     * @param UiComponentFactory    $uiComponentFactory
+     * @param Image                 $imageHelper
+     * @param UrlInterface          $urlBuilder
      * @param StoreManagerInterface $storeManager
-     * @param array $components
-     * @param array $data
+     * @param array                 $components
+     * @param array                 $data
      */
     public function __construct(
         ContextInterface $context,
@@ -32,19 +34,21 @@ class Thumbnail extends Column
         Image $imageHelper,
         UrlInterface $urlBuilder,
         StoreManagerInterface $storeManager,
-        array $components = [],
-        array $data = []
+        array $components=[],
+        array $data=[]
     ) {
         $this->storeManager = $storeManager;
-        $this->imageHelper = $imageHelper;
-        $this->urlBuilder = $urlBuilder;
+        $this->imageHelper  = $imageHelper;
+        $this->urlBuilder   = $urlBuilder;
         parent::__construct($context, $uiComponentFactory, $components, $data);
-    }
+
+    }//end __construct()
+
 
     /**
      * Prepare Data Source
      *
-     * @param array $dataSource
+     * @param  array $dataSource
      * @return array
      */
     public function prepareDataSource(array $dataSource)
@@ -58,16 +62,19 @@ class Thumbnail extends Column
                         \Magento\Framework\UrlInterface::URL_TYPE_MEDIA
                     ).$item[$fieldName];
                 }
-                $item[$fieldName . '_src'] = $url;
-                $item[$fieldName . '_alt'] = $this->getAlt($item) ?: '';
-                $item[$fieldName . '_title'] = $item['title'];
-                $item[$fieldName . '_link'] = $this->urlBuilder->getUrl('bannerslider/bannerslider/edit', ['id' => $item['id']]);
-                $item[$fieldName . '_orig_src'] = $url;
+
+                $item[$fieldName.'_src']      = $url;
+                $item[$fieldName.'_alt']      = $this->getAlt($item) ?: '';
+                $item[$fieldName.'_title']    = $item['title'];
+                $item[$fieldName.'_link']     = $this->urlBuilder->getUrl('bannerslider/bannerslider/edit', ['id' => $item['id']]);
+                $item[$fieldName.'_orig_src'] = $url;
             }
         }
 
         return $dataSource;
-    }
+
+    }//end prepareDataSource()
+
 
     /**
      * @param array $row
@@ -78,5 +85,8 @@ class Thumbnail extends Column
     {
         $altField = $this->getData('config/altField') ?: self::ALT_FIELD;
         return isset($row[$altField]) ? $row[$altField] : null;
-    }
-}
+
+    }//end getAlt()
+
+
+}//end class

@@ -4,11 +4,14 @@ namespace Navigate\HomepageBannerSlider\Controller\Adminhtml\Bannerslider;
 
 class Index extends \Magento\Backend\App\Action
 {
+
     protected $resultPageFactory = false;
+
 
     /**
      * Index constructor.
-     * @param \Magento\Backend\App\Action\Context $context
+     *
+     * @param \Magento\Backend\App\Action\Context        $context
      * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
      */
     public function __construct(
@@ -17,7 +20,9 @@ class Index extends \Magento\Backend\App\Action
     ) {
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
-    }
+
+    }//end __construct()
+
 
     public function execute()
     {
@@ -26,5 +31,8 @@ class Index extends \Magento\Backend\App\Action
         $resultPage->setActiveMenu('Navigate_HomepageBannerSlider::bannerslider');
         $resultPage->addBreadcrumb(__('Homepage Banner Slider'), __('Homepage Banner Slider'));
         return $resultPage;
-    }
-}
+
+    }//end execute()
+
+
+}//end class

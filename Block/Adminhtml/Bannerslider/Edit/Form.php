@@ -4,6 +4,8 @@ namespace Navigate\HomepageBannerSlider\Block\Adminhtml\Bannerslider\Edit;
 
 class Form extends \Magento\Backend\Block\Widget\Form\Generic
 {
+
+
     /**
      * Prepare form
      *
@@ -11,12 +13,24 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
      */
     protected function _prepareForm()
     {
-        /** @var \Magento\Framework\Data\Form $form */
+        /*
+            @var \Magento\Framework\Data\Form $form
+        */
         $form = $this->_formFactory->create(
-            ['data' => ['id' => 'edit_form', 'action' => $this->getData('action'), 'method' => 'post' , 'enctype' => 'multipart/form-data']]
+            [
+                'data' => [
+                    'id'      => 'edit_form',
+                    'action'  => $this->getData('action'),
+                    'method'  => 'post',
+                    'enctype' => 'multipart/form-data',
+                ],
+            ]
         );
         $form->setUseContainer(true);
         $this->setForm($form);
         return parent::_prepareForm();
-    }
-}
+
+    }//end _prepareForm()
+
+
+}//end class

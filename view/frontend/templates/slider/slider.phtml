@@ -13,7 +13,7 @@ if ($slidercount > 0) {
             href="<?= ($slider->getUrlKey()) ? $slider->getUrlKey() : "javascript:void(0)" ?>" <?php if (!empty($slider->getUrlKey())) { ?> target="_blank" <?php } ?>>
                 
                 <picture>
-                    <source media="(min-width: 750px)" srcset="<?= $mediaUrl.$slider->getImagename() ?>">
+                    <source media="(min-width: 750px)" srcset="<?= $block->escapeHtml($mediaUrl.$slider->getImagename()) ?>">
                     <source media="(max-width: 749px)" srcset="<?php
                         $imageUrl='';
                     if (strlen($slider->getMobileimagename())==0) {
@@ -21,53 +21,46 @@ if ($slidercount > 0) {
                     } else {
                         $imageUrl=$slider->getMobileimagename();
                     }
-                        
-                        echo $mediaUrl.$imageUrl; ?>">
+                    $block->escapeHtml($mediaUrl.$imageUrl); ?>">
                     <img src="<?php
                             $imageUrl='';
                     if (strlen($slider->getMobileimagename())==0) {
                         $imageUrl=$slider->getImagename();
                     } else {
                         $imageUrl=$slider->getMobileimagename();
-                    }
-                                    
-                        echo $mediaUrl.$imageUrl; ?>" alt="<?= $slider->getTitle() ?>" title="<?= $slider->getTitle() ?>" >
+                    }         
+                    $block->escapeHtml($mediaUrl.$imageUrl); ?>" alt="<?= $block->escapeHtml($slider->getTitle()) ?>" title="<?= $block->escapeHtml($slider->getTitle()) ?>" >
                 </picture>
                 <?php
-                     $f=0;
-                if ($slider->getSlidertitle()) {
-                    $f=1;
-                }
-
-                if ($slider->getButtontitle()) {
-                    $f=1;
-                }
-
-                if ($f==1) {
-                    ?>
+                    $f=0;
+                    if ($slider->getSlidertitle()) {
+                        $f=1;
+                    }
+                    if ($slider->getButtontitle()) {
+                        $f=1;
+                    }
+                    if ($f==1) {
+                ?>
                 <div class="main_home_slider-info" >
                     <div class="main_home_slider-info-inner">
                     <?php if ($slider->getSlidertitle()) { ?>
-                        <h3 class="main_home_slider-info-title"><?= $slider->getSlidertitle() ?></h3>
+                        <h3 class="main_home_slider-info-title"><?= $block->escapeHtml($slider->getSlidertitle()) ?></h3>
                     <?php } ?>
                     <?php
                     if ($slider->getButtontitle()) {
                         ?>
 
-                    <a href="<?= ($slider->getUrlKey()) ? $slider->getUrlKey() : "javascript:void(0)" ?>" <?php if (!empty($slider->getUrlKey())) { ?> target="_blank" <?php } ?> class="main_home_slider-info-button action"><?= $slider->getButtontitle() ?></a>
+                    <a href="<?= ($slider->getUrlKey()) ? $slider->getUrlKey() : "javascript:void(0)" ?>" <?php if (!empty($slider->getUrlKey())) { ?> target="_blank" <?php } ?> class="main_home_slider-info-button action"><?= $block->escapeHtml($slider->getButtontitle()) ?></a>
 
                   <?php } ?>
                     </div> 
                 </div>
             <?php } ?>
-
             </div>
         </div>
         <?php } ?>
     </div>
 </div>
-
-
 <script type="text/javascript">
     require(["jquery","navigate/bannerslider/owl.carousel"],function($) {
         $('.main_home_slider').css('display', "block").owlCarousel({
@@ -84,7 +77,6 @@ if ($slidercount > 0) {
 </script>
 <?php } else { ?>
 <div class="message info empty">
-    <div><?php /* @escapeNotVerified */
-        echo __('We can\'t find banner slider matching the selection.') ?></div>
+    <div><?= /* @escapeNotVerified */ $block->escapeHtml(__('We can\'t find banner slider matching the selection.')) ?></div>
 </div>
 <?php } ?>
