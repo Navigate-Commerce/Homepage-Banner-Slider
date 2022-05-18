@@ -21,7 +21,7 @@ if ($slidercount > 0) {
                     } else {
                         $imageUrl=$slider->getMobileimagename();
                     }
-                    $block->escapeHtml($mediaUrl.$imageUrl); ?>">
+                    echo $block->escapeHtml($mediaUrl.$imageUrl); ?>">
                     <img src="<?php
                             $imageUrl='';
                     if (strlen($slider->getMobileimagename())==0) {
