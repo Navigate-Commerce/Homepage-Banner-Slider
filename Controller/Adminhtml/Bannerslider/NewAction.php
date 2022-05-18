@@ -18,7 +18,6 @@ class NewAction extends \Magento\Backend\App\Action
     {
         $this->resultForwardFactory = $resultForwardFactory;
         parent::__construct($context);
-
     }//end __construct()
 
 
@@ -31,8 +30,5 @@ class NewAction extends \Magento\Backend\App\Action
     {
         $resultForward = $this->resultForwardFactory->create();
         return $resultForward->forward('edit');
-
     }//end execute()
-
-
 }//end class

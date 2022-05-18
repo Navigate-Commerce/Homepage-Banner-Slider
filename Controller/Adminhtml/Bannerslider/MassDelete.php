@@ -24,7 +24,6 @@ class MassDelete extends \Magento\Backend\App\Action
         $this->_filter            = $filter;
         $this->_collectionFactory = $collectionFactory;
         parent::__construct($context);
-
     }//end __construct()
 
 
@@ -46,8 +45,5 @@ class MassDelete extends \Magento\Backend\App\Action
 
         $resultRedirect = $this->resultRedirectFactory->create();
         return $resultRedirect->setPath('bannerslider/bannerslider/index');
-
     }//end execute()
-
-
 }//end class

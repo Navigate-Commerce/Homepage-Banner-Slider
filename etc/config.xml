@@ -11,6 +11,15 @@
             <general>
                 <enable>1</enable>
             </general>
+             <slider>
+                <autoplay>1</autoplay>
+                <autoplay_timing>7000</autoplay_timing>
+                <item_desktop>1</item_desktop>
+                <item_mobile>1</item_mobile>
+                <show_arrow>1</show_arrow>
+                <show_dots>0</show_dots>
+                <infinite>1</infinite>
+            </slider>
         </bannerslider>
     </default>
 </config>

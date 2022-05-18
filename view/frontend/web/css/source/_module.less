@@ -79,8 +79,9 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100%;
-        width: 100%;
+        height: ~'calc(100% - 40px)';
+        width: ~'calc(100% - 40px)';
+        padding: 20px;
 
         &-inner{
             text-align: center;
@@ -113,6 +114,26 @@
                 color: #fff;
                 text-decoration: none;
             }
+        }
+
+        .top-left &{
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        .top-right &{
+            justify-content: flex-end;
+            align-items: flex-start;
+        }
+
+        .bottom-left &{
+            justify-content: flex-start;
+            align-items: flex-end;
+        }
+
+        .bottom-right &{
+            justify-content: flex-end;
+            align-items: flex-end;
         }
 
     }

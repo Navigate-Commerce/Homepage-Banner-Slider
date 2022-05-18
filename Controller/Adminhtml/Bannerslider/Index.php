@@ -20,7 +20,6 @@ class Index extends \Magento\Backend\App\Action
     ) {
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
-
     }//end __construct()
 
 
@@ -31,8 +30,5 @@ class Index extends \Magento\Backend\App\Action
         $resultPage->setActiveMenu('Navigate_HomepageBannerSlider::bannerslider');
         $resultPage->addBreadcrumb(__('Homepage Banner Slider'), __('Homepage Banner Slider'));
         return $resultPage;
-
     }//end execute()
-
-
 }//end class

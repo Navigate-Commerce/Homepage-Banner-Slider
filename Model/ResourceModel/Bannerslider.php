@@ -14,8 +14,5 @@ class Bannerslider extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
     public function _construct()
     {
         $this->_init('bannerslider', 'id');
-
     }//end _construct()
-
-
 }//end class

@@ -25,11 +25,10 @@ class Edit extends Container
     public function __construct(
         Context $context,
         Registry $registry,
-        array $data=[]
+        array $data = []
     ) {
         $this->_coreRegistry = $registry;
         parent::__construct($context, $data);
-
     }//end __construct()
 
 
@@ -63,7 +62,6 @@ class Edit extends Container
             ],
             10
         );
-
     }//end _construct()
 
 
@@ -84,8 +82,5 @@ class Edit extends Container
         // $this->removeButton('delete');
         $this->removeButton('reset');
         return parent::_prepareLayout();
-
     }//end _prepareLayout()
-
-
 }//end class

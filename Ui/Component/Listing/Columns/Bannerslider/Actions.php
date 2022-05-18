@@ -26,12 +26,11 @@ class Actions extends \Magento\Ui\Component\Listing\Columns\Column
         \Magento\Framework\View\Element\UiComponent\ContextInterface $context,
         \Magento\Framework\View\Element\UiComponentFactory $uiComponentFactory,
         \Magento\Framework\UrlInterface $urlBuilder,
-        array $components=[],
-        array $data=[]
+        array $components = [],
+        array $data = []
     ) {
         $this->urlBuilder = $urlBuilder;
         parent::__construct($context, $uiComponentFactory, $components, $data);
-
     }//end __construct()
 
 
@@ -70,8 +69,5 @@ class Actions extends \Magento\Ui\Component\Listing\Columns\Column
         }//end if
 
         return $dataSource;
-
     }//end prepareDataSource()
-
-
 }//end class

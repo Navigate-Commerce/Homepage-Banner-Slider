@@ -9,5 +9,7 @@
     	<add id="Navigate_HomepageBannerSlider::main" title="Homepage Banner Slider" translate="Homepage Banner Slider" module="Navigate_HomepageBannerSlider" parent="Navigate_Core::core" sortOrder="200" resource="Navigate_HomepageBannerSlider::main" dependsOnConfig="bannerslider/general/enable"/>
 
         <add id="Navigate_HomepageBannerSlider::bannerslider" parent="Navigate_HomepageBannerSlider::main" title="Manage Homepage Banner Slider" module="Navigate_HomepageBannerSlider"  sortOrder="100" dependsOnModule="Navigate_HomepageBannerSlider" action="bannerslider/bannerslider/index" resource="Navigate_HomepageBannerSlider::bannerslider"/>
+
+         <add id="Navigate_HomepageBannerSlider::configuration_menu" title="Configurations" module="Navigate_HomepageBannerSlider" parent="Navigate_HomepageBannerSlider::main" sortOrder="200" action="adminhtml/system_config/edit/section/bannerslider" resource="Navigate_HomepageBannerSlider::configuration_menu" target="_blank"/>
     </menu>
 </config>

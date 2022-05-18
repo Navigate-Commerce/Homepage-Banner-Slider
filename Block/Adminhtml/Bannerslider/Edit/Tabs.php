@@ -19,7 +19,6 @@ class Tabs extends WidgetTabs
         $this->setId('bannerslider_create_tabs');
         $this->setDestElementId('edit_form');
         $this->setTitle(__('Bannerslider Information'));
-
     }//end _construct()
 
 
@@ -39,8 +38,5 @@ class Tabs extends WidgetTabs
             ]
         );
         return parent::_beforeToHtml();
-
     }//end _beforeToHtml()
-
-
 }//end class

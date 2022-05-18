@@ -20,8 +20,5 @@ class Collection extends AbstractCollection
             'Navigate\HomepageBannerSlider\Model\Bannerslider',
             'Navigate\HomepageBannerSlider\Model\ResourceModel\Bannerslider'
         );
-
     }//end _construct()
-
-
 }//end class

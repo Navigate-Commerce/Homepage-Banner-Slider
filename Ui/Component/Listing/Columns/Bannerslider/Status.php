@@ -18,8 +18,5 @@ class Status implements \Magento\Framework\Data\OptionSourceInterface
             'value' => 'Disabled',
         ];
         return $options;
-
     }//end toOptionArray()
-
-
 }//end class

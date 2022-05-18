@@ -26,11 +26,10 @@ class Info extends Generic implements TabInterface
         Registry $registry,
         FormFactory $formFactory,
         \Magento\Framework\Session\SessionManagerInterface $coreSession,
-        array $data=[]
+        array $data = []
     ) {
         $this->_coreSession = $coreSession;
         parent::__construct($context, $registry, $formFactory, $data);
-
     }//end __construct()
 
 
@@ -56,6 +55,26 @@ class Info extends Generic implements TabInterface
         }
 
         $fieldset->addField(
+            'status',
+            'select',
+            [
+                'name'    => 'status',
+                'label'   => __('Status'),
+                'comment' => __('Status'),
+                'values'  => [
+                    [
+                        'value' => 'Enabled',
+                        'label' => 'Enabled',
+                    ],
+                    [
+                        'value' => 'Disabled',
+                        'label' => 'Disabled',
+                    ],
+                ],
+            ]
+        );
+        
+        $fieldset->addField(
             'title',
             'text',
             [
@@ -78,6 +97,27 @@ class Info extends Generic implements TabInterface
             ]
         );
 
+
+        $fieldset->addField(
+            'enable_button',
+            'select',
+            [
+                'name'    => 'enable_button',
+                'label'   => __('Enable Button'),
+                'comment' => __('Enable Button'),
+                'values'  => [
+                    [
+                        'value' => '0',
+                        'label' => 'No',
+                    ],
+                    [
+                        'value' => '1',
+                        'label' => 'Yes',
+                    ],
+                ],
+            ]
+        );
+
         $fieldset->addField(
             'buttontitle',
             'text',
@@ -85,8 +125,46 @@ class Info extends Generic implements TabInterface
                 'name'    => 'buttontitle',
                 'label'   => __('Button Title'),
                 'comment' => __('Button Title'),
+                'required' => true,
             ]
         );
+
+
+
+
+
+        $fieldset->addField(
+            'text_position',
+            'select',
+            [
+                'name'    => 'text_position',
+                'label'   => __('Button Position'),
+                'comment' => __('Button Position'),
+                'values'  => [
+                    [
+                        'value' => 'top-left',
+                        'label' => 'Top Left',
+                    ],
+                    [
+                        'value' => 'top-right',
+                        'label' => 'Top Right',
+                    ],
+                    [
+                        'value' => 'bottom-left',
+                        'label' => 'Bottom Left',
+                    ],
+                    [
+                        'value' => 'bottom-right',
+                        'label' => 'Bottom Right',
+                    ],
+                    [
+                        'value' => 'center',
+                        'label' => 'Center',
+                    ],
+                ],
+            ]
+        );
+
 
         $fieldset->addField(
             'url_key',
@@ -96,9 +174,27 @@ class Info extends Generic implements TabInterface
                 'label'   => __('Button Url Key'),
                 'comment' => __('Button Url Key'),
                 'class'   => 'validate-url',
+                'required' => true,
                 'note'    => 'E.g : https://test.com/test.html',
             ]
         );
+
+        $fieldset->addField(
+            'open_new_tab',
+            'select',
+            [
+                'name'    => 'open_new_tab',
+                'label'   => __('Open Link In New Tab'),
+                'comment' => __('Open Link In New Tab'),
+                'default'=>'1',
+                'value' => 1,
+                'values'    => [
+                                 ['label' => 'Yes', 'value' => 1],
+                                 ['label' => 'No', 'value' => 0]
+                               ]
+            ]
+        );
+
 
         $fieldset->addField(
             'imagename',
@@ -124,25 +220,7 @@ class Info extends Generic implements TabInterface
             ]
         );
 
-        $fieldset->addField(
-            'status',
-            'select',
-            [
-                'name'    => 'status',
-                'label'   => __('Status'),
-                'comment' => __('Status'),
-                'values'  => [
-                    [
-                        'value' => 'Enabled',
-                        'label' => 'Enabled',
-                    ],
-                    [
-                        'value' => 'Disabled',
-                        'label' => 'Disabled',
-                    ],
-                ],
-            ]
-        );
+        
 
         $fieldset->addField(
             'position',
@@ -152,6 +230,57 @@ class Info extends Generic implements TabInterface
                 'label'   => __('Position'),
                 'comment' => __('Position'),
                 'class'   => 'validate-number',
+                'note'=>"<script type='text/javascript'>
+    
+
+require([
+    'jquery'
+], function ($) {
+    'use strict';
+    jQuery(document).ready(function(){
+        
+         function updatefeilds() {
+          var enable_button = $('#enable_button').val();
+
+         if(enable_button=='1')
+         {
+
+           $('#buttontitle').addClass('required-entry');
+           $('#buttontitle').parent().parent().show(); 
+           $('#text_position').parent().parent().show(); 
+           $('#url_key').parent().parent().show();
+           $('#url_key').addClass('required-entry'); 
+           $('#open_new_tab').parent().parent().show();
+
+         }else{
+
+           $('#buttontitle').removeClass('required-entry');
+           $('#buttontitle').parent().parent().hide(); 
+           $('#text_position').parent().parent().hide(); 
+           $('#url_key').parent().parent().hide();
+           $('#url_key').removeClass('required-entry'); 
+           $('#open_new_tab').parent().parent().hide();
+        
+        }
+}
+
+        $('#enable_button').change(function(){
+            updatefeilds();
+        });
+
+      var pathname = window.location.pathname;
+       if(pathname.includes('new')){
+         $('#open_new_tab').val(1);
+         $('#text_position').val('center');
+       }
+      
+
+        setInterval(updatefeilds, 500);
+});
+
+
+});
+</script>"
             ]
         );
 
@@ -160,7 +289,6 @@ class Info extends Generic implements TabInterface
         $this->setForm($form);
 
         return parent::_prepareForm();
-
     }//end _prepareForm()
 
 
@@ -170,7 +298,6 @@ class Info extends Generic implements TabInterface
     public function getTabLabel()
     {
         return __('Bannerslider');
-
     }//end getTabLabel()
 
 
@@ -180,7 +307,6 @@ class Info extends Generic implements TabInterface
     public function getTabTitle()
     {
         return __('Bannerslider');
-
     }//end getTabTitle()
 
 
@@ -190,7 +316,6 @@ class Info extends Generic implements TabInterface
     public function canShowTab()
     {
         return true;
-
     }//end canShowTab()
 
 
@@ -200,8 +325,5 @@ class Info extends Generic implements TabInterface
     public function isHidden()
     {
         return false;
-
     }//end isHidden()
-
-
 }//end class

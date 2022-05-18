@@ -28,7 +28,6 @@ class Delete extends \Magento\Backend\App\Action
         $this->_resultFactory      = $context->getResultFactory();
         $this->bannersliderFactory = $bannersliderFactory;
         $this->messageManager      = $messageManager;
-
     }//end __construct()
 
 
@@ -52,8 +51,5 @@ class Delete extends \Magento\Backend\App\Action
         $resultRedirect = $this->_resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $resultRedirect->setPath('bannerslider/bannerslider/index');
         return $resultRedirect;
-
     }//end execute()
-
-
 }//end class

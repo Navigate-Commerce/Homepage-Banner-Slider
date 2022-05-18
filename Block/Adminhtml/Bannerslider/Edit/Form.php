@@ -29,8 +29,5 @@ class Form extends \Magento\Backend\Block\Widget\Form\Generic
         $form->setUseContainer(true);
         $this->setForm($form);
         return parent::_prepareForm();
-
     }//end _prepareForm()
-
-
 }//end class

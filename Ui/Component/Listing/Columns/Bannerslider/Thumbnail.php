@@ -34,14 +34,13 @@ class Thumbnail extends Column
         Image $imageHelper,
         UrlInterface $urlBuilder,
         StoreManagerInterface $storeManager,
-        array $components=[],
-        array $data=[]
+        array $components = [],
+        array $data = []
     ) {
         $this->storeManager = $storeManager;
         $this->imageHelper  = $imageHelper;
         $this->urlBuilder   = $urlBuilder;
         parent::__construct($context, $uiComponentFactory, $components, $data);
-
     }//end __construct()
 
 
@@ -72,7 +71,6 @@ class Thumbnail extends Column
         }
 
         return $dataSource;
-
     }//end prepareDataSource()
 
 
@@ -85,8 +83,5 @@ class Thumbnail extends Column
     {
         $altField = $this->getData('config/altField') ?: self::ALT_FIELD;
         return isset($row[$altField]) ? $row[$altField] : null;
-
     }//end getAlt()
-
-
 }//end class

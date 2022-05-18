@@ -12,8 +12,5 @@ class Bannerslider extends \Magento\Framework\Model\AbstractModel
     public function _construct()
     {
         $this->_init('Navigate\HomepageBannerSlider\Model\ResourceModel\Bannerslider');
-
     }//end _construct()
-
-
 }//end class

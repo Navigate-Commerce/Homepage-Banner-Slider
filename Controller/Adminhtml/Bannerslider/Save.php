@@ -37,7 +37,6 @@ class Save extends \Magento\Backend\App\Action
         $this->uploader            = $uploader;
         $this->_mediaDirectory     = $filesystem->getDirectoryWrite(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
         $this->fileIo              = $fileIo;
-
     }//end __construct()
 
 
@@ -175,8 +174,5 @@ class Save extends \Magento\Backend\App\Action
 
         $resultRedirect->setPath('bannerslider/bannerslider/index');
         return $resultRedirect;
-
     }//end execute()
-
-
 }//end class
