@@ -43,7 +43,7 @@ class Edit extends \Magento\Backend\App\Action
         $this->_coreRegistry->register('bannerslider', $model);
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('Navigate_HomepageBannerSlider::bannerslider');
-        $resultPage->getConfig()->getTitle()->prepend($bannerslider ? __('Edit Bannerslider "'.$model->getTitle().'"') : __('New Bannerslider'));
+        $resultPage->getConfig()->getTitle()->prepend($bannerslider ? __('Edit Banner "'.$model->getTitle().'"') : __('New Bannerslider'));
         return $resultPage;
     }//end execute()
 }//end class

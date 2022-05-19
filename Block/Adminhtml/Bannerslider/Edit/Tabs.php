@@ -18,7 +18,7 @@ class Tabs extends WidgetTabs
         parent::_construct();
         $this->setId('bannerslider_create_tabs');
         $this->setDestElementId('edit_form');
-        $this->setTitle(__('Bannerslider Information'));
+        $this->setTitle(__('Banner Information'));
     }//end _construct()
 
 
