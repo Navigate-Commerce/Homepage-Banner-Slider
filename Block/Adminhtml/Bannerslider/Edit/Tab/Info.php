@@ -204,7 +204,7 @@ class Info extends Generic implements TabInterface
                 'label'    => __('Desktop Image'),
                 'comment'  => __('Image'),
                 'required' => true,
-                'note'     => 'Maximum file size: 2 MB. Allowed file types: jpg,jpeg,png',
+                'note'     => 'Maximum file size: 2 MB. Allowed file types: jpg,jpeg,png,svg,gif',
             ]
         );
 
@@ -215,7 +215,7 @@ class Info extends Generic implements TabInterface
                 'name'    => 'mobileimagename',
                 'label'   => __('Mobile Image'),
                 'comment' => __('Mobile Image'),
-                'note'    => 'Maximum file size: 2 MB. Allowed file types: jpg,jpeg,png',
+                'note'    => 'Maximum file size: 2 MB. Allowed file types: jpg,jpeg,png,svg,gif',
 
             ]
         );

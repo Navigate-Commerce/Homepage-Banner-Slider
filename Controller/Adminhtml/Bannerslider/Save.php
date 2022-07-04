@@ -80,19 +80,21 @@ class Save extends \Magento\Backend\App\Action
                         'jpg',
                         'jpeg',
                         'png',
+                        'svg',
+                        'gif'
                     ];
                     $uploader           = $this->uploader->create(['fileId' => 'imagename']);
                     if (in_array($uploader->getFileExtension(), $allowed_file_types)) {
                         $filename             = '';
                         $allowedExtensionType = '';
-                        $uploader->setAllowedExtensions(['jpg', 'jpeg', 'png']);
+                        $uploader->setAllowedExtensions(['jpg', 'jpeg', 'png','svg','gif']);
                         $uploader->setAllowRenameFiles(true);
                         $uploader->setFilesDispersion(true);
                         $uploader->save($target);
                         $fileName          = 'Navigate/Slider'.$uploader->getUploadedFileName();
                         $data['imagename'] = $fileName;
                     } else {
-                        $this->messageManager->addError(__('Please upload valid type of format for Slider Image. File types allowed for Image are : .jpg, .jpeg, .png'));
+                        $this->messageManager->addError(__('Please upload valid type of format for Slider Image. File types allowed for Image are : .jpg, .jpeg, .png, .svg, .gif'));
 
                         if ($this->getRequest()->getParam('id')) {
                             $this->_redirect('*/*/edit', ['id' => $this->getRequest()->getParam('id'), '_current' => true]);
@@ -114,19 +116,21 @@ class Save extends \Magento\Backend\App\Action
                         'jpg',
                         'jpeg',
                         'png',
+                        'svg',
+                        'gif'
                     ];
                     $uploader           = $this->uploader->create(['fileId' => 'mobileimagename']);
                     if (in_array($uploader->getFileExtension(), $allowed_file_types)) {
                         $filename             = '';
                         $allowedExtensionType = '';
-                        $uploader->setAllowedExtensions(['jpg', 'jpeg', 'png']);
+                        $uploader->setAllowedExtensions(['jpg', 'jpeg', 'png','svg','gif']);
                         $uploader->setAllowRenameFiles(true);
                         $uploader->setFilesDispersion(true);
                         $uploader->save($target);
                         $fileName                = 'Navigate/Slider'.$uploader->getUploadedFileName();
                         $data['mobileimagename'] = $fileName;
                     } else {
-                        $this->messageManager->addError(__('Please upload valid type of format for Slider Image. File types allowed for Image are : .jpg, .jpeg, .png'));
+                        $this->messageManager->addError(__('Please upload valid type of format for Slider Image. File types allowed for Image are : .jpg, .jpeg, .png, .svg, .gif'));
 
                         if ($this->getRequest()->getParam('id')) {
                             $this->_redirect('*/*/edit', ['id' => $this->getRequest()->getParam('id'), '_current' => true]);
