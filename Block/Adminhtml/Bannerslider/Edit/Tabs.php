@@ -1,4 +1,12 @@
 <?php
+/*
+ * Navigate Commerce
+ *
+ * @author        Navigate Commerce
+ * @package       Navigate_HomepageBannerSlider
+ * @copyright     Copyright (c) Navigate (https://www.navigatecommerce.com/)
+ * @license       https://www.navigatecommerce.com/end-user-license-agreement
+ */
 
 namespace Navigate\HomepageBannerSlider\Block\Adminhtml\Bannerslider\Edit;
 
@@ -6,7 +14,6 @@ use Magento\Backend\Block\Widget\Tabs as WidgetTabs;
 
 class Tabs extends WidgetTabs
 {
-
 
     /**
      * Intialize construct
@@ -19,10 +26,11 @@ class Tabs extends WidgetTabs
         $this->setId('bannerslider_create_tabs');
         $this->setDestElementId('edit_form');
         $this->setTitle(__('Banner Information'));
-    }//end _construct()
-
+    }
 
     /**
+     * General Tab
+     *
      * @return WidgetTabs
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -33,10 +41,10 @@ class Tabs extends WidgetTabs
             [
                 'label'   => __('General'),
                 'title'   => __('General'),
-                'content' => $this->getLayout()->createBlock('Navigate\HomepageBannerSlider\Block\Adminhtml\Bannerslider\Edit\Tab\Info')->toHtml(),
+                'content' => $this->getLayout()->createBlock(\Navigate\HomepageBannerSlider\Block\Adminhtml\Bannerslider\Edit\Tab\Info::class)->toHtml(), // phpcs:ignore
                 'active'  => true,
             ]
         );
         return parent::_beforeToHtml();
-    }//end _beforeToHtml()
-}//end class
+    }
+}

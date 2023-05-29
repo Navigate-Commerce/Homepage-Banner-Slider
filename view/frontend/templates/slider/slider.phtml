@@ -1,19 +1,28 @@
 <?php
+/*
+ * Navigate Commerce
+ *
+ * @author        Navigate Commerce
+ * @package       Navigate_HomepageBannerSlider
+ * @copyright     Copyright (c) Navigate (https://www.navigatecommerce.com/)
+ * @license       https://www.navigatecommerce.com/end-user-license-agreement
+ */
+
 $collection = $block->getSliderCollection();
 $slidercount = 0;
 $slidercount     = $collection->count();
 $mediaUrl = $block->getMediaUrl();
 if ($slidercount > 0) {
     ?>
-<div class="main_home_slider_section">
-    <div class="main_home_slider owl-carousel owl-theme">
+<div class="main-home-slider_section">
+    <div class="main-home-slider owl-carousel owl-theme">
         <?php foreach ($collection as $slider) { ?>
         <div>
-            <div class="main_home_slider-img <?= $slider->getTextPosition();?>"
-            href="<?= ($slider->getUrlKey()) ? $slider->getUrlKey() : "javascript:void(0)" ?>" <?php if (!empty($slider->getUrlKey())) { ?> target="_blank" <?php } ?>>
+            <div class="main-home-slider-img <?= /* @noEscape */ $slider->getTextPosition();?>"
+            href="<?= /* @noEscape */ ($slider->getUrlKey()) ? $slider->getUrlKey() : "javascript:void(0)" ?>" <?php if (!empty($slider->getUrlKey())) { ?> target="_blank" <?php } ?>> <?php // phpcs:ignore ?>
                 
                 <picture>
-                    <source media="(min-width: 750px)" srcset="<?= $block->escapeHtml($mediaUrl.$slider->getImagename()) ?>">
+                    <source media="(min-width: 750px)" srcset="<?= $block->escapeHtml($mediaUrl.$slider->getImagename()) ?>"> <?php // phpcs:ignore ?>
                     <source media="(max-width: 749px)" srcset="<?php
                         $imageUrl='';
                     if (strlen($slider->getMobileimagename())==0) {
@@ -29,7 +38,7 @@ if ($slidercount > 0) {
                     } else {
                         $imageUrl=$slider->getMobileimagename();
                     }
-                    $block->escapeHtml($mediaUrl.$imageUrl); ?>" alt="<?= $block->escapeHtml($slider->getTitle()) ?>" title="<?= $block->escapeHtml($slider->getTitle()) ?>" >
+                    $block->escapeHtml($mediaUrl.$imageUrl); ?>" alt="<?= $block->escapeHtml($slider->getTitle()) ?>" title="<?= $block->escapeHtml($slider->getTitle()) ?>" > <?php // phpcs:ignore ?>
                 </picture>
                 <?php
                     $f=0;
@@ -41,21 +50,21 @@ if ($slidercount > 0) {
                 }
                 if ($f==1) {
                     ?>
-                <div class="main_home_slider-info" >
-                    <div class="main_home_slider-info-inner">
+                <div class="main-home-slider-info" >
+                    <div class="main-home-slider-info-inner">
                     <?php if ($slider->getSlidertitle()) { ?>
-                        <h3 class="main_home_slider-info-title"><?= $block->escapeHtml($slider->getSlidertitle()) ?></h3>
+                        <h3 class="main-home-slider-info-title"><?= $block->escapeHtml($slider->getSlidertitle()) ?></h3> <?php // phpcs:ignore ?>
                     <?php } ?>
                     <?php
                     if ($slider->getButtontitle()) {
                         if ($slider->getOpenNewTab()=='1') {
                             ?>
 
-                    <a href="<?= ($slider->getUrlKey()) ? $slider->getUrlKey() : "javascript:void(0)" ?>" <?php if (!empty($slider->getUrlKey())) { ?> target="_blank" <?php } ?> class="main_home_slider-info-button action"><?= $block->escapeHtml($slider->getButtontitle()) ?></a>
+                    <a href="<?= /* @noEscape */ ($slider->getUrlKey()) ? $slider->getUrlKey() : "javascript:void(0)" ?>" <?php if (!empty($slider->getUrlKey())) { ?> target="_blank" <?php } ?> class="main-home-slider-info-button action"><?= $block->escapeHtml($slider->getButtontitle()) ?></a> <?php // phpcs:ignore ?>
 
                   <?php } else {?>
 
-                    <a href="<?= ($slider->getUrlKey()) ? $slider->getUrlKey() : "javascript:void(0)" ?>" <?php if (!empty($slider->getUrlKey())) { ?>  <?php } ?> class="main_home_slider-info-button action"><?= $block->escapeHtml($slider->getButtontitle()) ?></a>
+                    <a href="<?= /* @noEscape */ ($slider->getUrlKey()) ? $slider->getUrlKey() : "javascript:void(0)" ?>" <?php if (!empty($slider->getUrlKey())) { ?>  <?php } ?> class="main-home-slider-info-button action"><?= $block->escapeHtml($slider->getButtontitle()) ?></a> <?php // phpcs:ignore ?>
               <?php }}?>
                     </div> 
                 </div>
@@ -80,23 +89,23 @@ if ($slidercount > 0) {
 
 
 
-<script type="text/javascript">
+<script>
     require(["jquery","navigate/bannerslider/owl.carousel"],function($) {
-        $('.main_home_slider').css('display', "block").owlCarousel({
-            loop: <?= $block->getSystemConfig('bannerslider/slider/infinite'); ?>,
+        $('.main-home-slider').css('display', "block").owlCarousel({
+            loop: <?= /* @noEscape */ $block->getSystemConfig('bannerslider/slider/infinite'); ?>,
             responsiveClass:true,
-            dots:<?= $block->getSystemConfig('bannerslider/slider/show_dots'); ?>,
-            autoplay: <?= $block->getSystemConfig('bannerslider/slider/autoplay'); ?>,
-            autoplayTimeout: <?= $autoPlayspeed;?>,
-            nav:<?= $block->getSystemConfig('bannerslider/slider/show_arrow'); ?>,
+            dots:<?= /* @noEscape */ $block->getSystemConfig('bannerslider/slider/show_dots'); ?>,
+            autoplay: <?= /* @noEscape */ $block->getSystemConfig('bannerslider/slider/autoplay'); ?>,
+            autoplayTimeout: <?= /* @noEscape */ $autoPlayspeed;?>,
+            nav:<?= /* @noEscape */ $block->getSystemConfig('bannerslider/slider/show_arrow'); ?>,
             responsive : {
                 0:{
                     nav:false,
-                    items:<?= $block->getSystemConfig('bannerslider/slider/item_mobile'); ?>
+                    items:<?= /* @noEscape */ $block->getSystemConfig('bannerslider/slider/item_mobile'); ?>
                 },
                 768:{
-                    nav:<?= $block->getSystemConfig('bannerslider/slider/show_arrow'); ?>,
-                    items:<?= $block->getSystemConfig('bannerslider/slider/item_desktop'); ?>
+                    nav:<?= /* @noEscape */ $block->getSystemConfig('bannerslider/slider/show_arrow'); ?>,
+                    items:<?= /* @noEscape */ $block->getSystemConfig('bannerslider/slider/item_desktop'); ?>
                 }
             }
         });
@@ -105,6 +114,6 @@ if ($slidercount > 0) {
 </script>
 <?php } else { ?>
 <div class="message info empty">
-    <div><?= /* @escapeNotVerified */ $block->escapeHtml(__('We can\'t find banner slider matching the selection.')) ?></div>
+    <div><?= /* @escapeNotVerified */ $block->escapeHtml(__('We can\'t find banner slider matching the selection.')) ?></div> <?php // phpcs:ignore ?>
 </div>
 <?php } ?>

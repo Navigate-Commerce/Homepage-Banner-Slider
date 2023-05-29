@@ -1,10 +1,13 @@
 <?xml version="1.0"?>
 <!--
-/**
- * Copyright © 2021 Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
+ Navigate Commerce
+
+ @author        Navigate Commerce
+ @package       Navigate_HomepageBannerSlider
+ @copyright     Copyright (c) Navigate (https://www.navigatecommerce.com/)
+ @license       https://www.navigatecommerce.com/end-user-license-agreement
 -->
+
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="bannerslider" resource="default" engine="innodb" comment="Banner Slider">
         <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID"/>

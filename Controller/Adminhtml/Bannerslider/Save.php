@@ -1,4 +1,12 @@
 <?php
+/*
+ * Navigate Commerce
+ *
+ * @author        Navigate Commerce
+ * @package       Navigate_HomepageBannerSlider
+ * @copyright     Copyright (c) Navigate (https://www.navigatecommerce.com/)
+ * @license       https://www.navigatecommerce.com/end-user-license-agreement
+ */
 
 namespace Navigate\HomepageBannerSlider\Controller\Adminhtml\Bannerslider;
 
@@ -13,16 +21,24 @@ class Save extends \Magento\Backend\App\Action
      */
     protected $resultPageFactory = false;
 
+    /**
+     * @var \Magento\MediaStorage\Model\File\UploaderFactory
+     */
     protected $uploader;
 
+    /**
+     * @var \Magento\Framework\Filesystem
+     */
     protected $_mediaDirectory;
 
-
     /**
-     * Save constructor.
+     * Construct method
      *
-     * @param \Magento\Backend\App\Action\Context                      $context
+     * @param \Magento\Backend\App\Action\Context $context
      * @param \Navigate\HomepageBannerSlider\Model\BannersliderFactory $bannersliderFactory
+     * @param \Magento\MediaStorage\Model\File\UploaderFactory $uploader
+     * @param \Magento\Framework\Filesystem $filesystem
+     * @param File $fileIo
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
@@ -35,11 +51,17 @@ class Save extends \Magento\Backend\App\Action
         $this->_resultFactory      = $context->getResultFactory();
         $this->bannersliderFactory = $bannersliderFactory;
         $this->uploader            = $uploader;
-        $this->_mediaDirectory     = $filesystem->getDirectoryWrite(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA);
+        $this->_mediaDirectory     = $filesystem->getDirectoryWrite(
+            \Magento\Framework\App\Filesystem\DirectoryList::MEDIA
+        );
         $this->fileIo              = $fileIo;
-    }//end __construct()
+    }
 
-
+    /**
+     * Execute method
+     *
+     * @return void
+     */
     public function execute()
     {
         $data     = $this->getRequest()->getParams();
@@ -94,10 +116,15 @@ class Save extends \Magento\Backend\App\Action
                         $fileName          = 'Navigate/Slider'.$uploader->getUploadedFileName();
                         $data['imagename'] = $fileName;
                     } else {
-                        $this->messageManager->addError(__('Please upload valid type of format for Slider Image. File types allowed for Image are : .jpg, .jpeg, .png, .svg, .gif'));
+                        $this->messageManager->addError(
+                            __('Please upload valid type of format for Slider Image.
+                            File types allowed for Image are : .jpg, .jpeg, .png, .svg, .gif')
+                        );
 
                         if ($this->getRequest()->getParam('id')) {
-                            $this->_redirect('*/*/edit', ['id' => $this->getRequest()->getParam('id'), '_current' => true]);
+                            $this->_redirect('*/*/edit', [
+                                'id' => $this->getRequest()->getParam('id'),
+                                '_current' => true]);
                             return;
                         }
 
@@ -106,8 +133,8 @@ class Save extends \Magento\Backend\App\Action
                     }
                 } catch (\Exception $e) {
                     throw new \Magento\Framework\Exception\LocalizedException(__('The wrong item is specified.'));
-                }//end try
-            }//end if
+                }
+            }
 
             // Mobile image upload
             if (isset($MobileImgFiles) && $MobileImgFiles != '') {
@@ -130,10 +157,15 @@ class Save extends \Magento\Backend\App\Action
                         $fileName                = 'Navigate/Slider'.$uploader->getUploadedFileName();
                         $data['mobileimagename'] = $fileName;
                     } else {
-                        $this->messageManager->addError(__('Please upload valid type of format for Slider Image. File types allowed for Image are : .jpg, .jpeg, .png, .svg, .gif'));
+                        $this->messageManager->addError(
+                            __('Please upload valid type of format for Slider Image.
+                            File types allowed for Image are : .jpg, .jpeg, .png, .svg, .gif')
+                        );
 
                         if ($this->getRequest()->getParam('id')) {
-                            $this->_redirect('*/*/edit', ['id' => $this->getRequest()->getParam('id'), '_current' => true]);
+                            $this->_redirect('*/*/edit', [
+                                'id' => $this->getRequest()->getParam('id'),
+                                '_current' => true]);
                             return;
                         }
 
@@ -142,8 +174,8 @@ class Save extends \Magento\Backend\App\Action
                     }
                 } catch (\Exception $e) {
                     throw new \Magento\Framework\Exception\LocalizedException(__('The wrong item is specified.'));
-                }//end try
-            }//end if
+                }
+            }
 
             $id = $this->getRequest()->getParam('id');
             if ($id) {
@@ -162,7 +194,7 @@ class Save extends \Magento\Backend\App\Action
             }
         } catch (Exception $e) {
             $this->messageManager->addError('Something went wrong '.$e->getMessage());
-        }//end try
+        }
 
         $resultRedirect = $this->_resultFactory->create(ResultFactory::TYPE_REDIRECT);
 
@@ -178,5 +210,5 @@ class Save extends \Magento\Backend\App\Action
 
         $resultRedirect->setPath('bannerslider/bannerslider/index');
         return $resultRedirect;
-    }//end execute()
-}//end class
+    }
+}

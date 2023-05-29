@@ -1,17 +1,24 @@
 <?php
+/*
+ * Navigate Commerce
+ *
+ * @author        Navigate Commerce
+ * @package       Navigate_HomepageBannerSlider
+ * @copyright     Copyright (c) Navigate (https://www.navigatecommerce.com/)
+ * @license       https://www.navigatecommerce.com/end-user-license-agreement
+ */
 
 namespace Navigate\HomepageBannerSlider\Ui\Component\Listing\Columns\Bannerslider;
 
 class Actions extends \Magento\Ui\Component\Listing\Columns\Column
 {
-    const URL_PATH_STORE_EDIT   = 'bannerslider/bannerslider/edit';
-    const URL_PATH_STORE_DELETE = 'bannerslider/bannerslider/delete';
+    protected const URL_PATH_STORE_EDIT   = 'bannerslider/bannerslider/edit';
+    protected const URL_PATH_STORE_DELETE = 'bannerslider/bannerslider/delete';
 
     /**
      * @var \Magento\Framework\UrlInterface
      */
     protected $urlBuilder;
-
 
     /**
      * Actions constructor.
@@ -31,9 +38,14 @@ class Actions extends \Magento\Ui\Component\Listing\Columns\Column
     ) {
         $this->urlBuilder = $urlBuilder;
         parent::__construct($context, $uiComponentFactory, $components, $data);
-    }//end __construct()
+    }
 
-
+    /**
+     * Datasource function
+     *
+     * @param array $dataSource
+     * @return array
+     */
     public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource['data']['items'])) {
@@ -64,10 +76,10 @@ class Actions extends \Magento\Ui\Component\Listing\Columns\Column
                             ],
                         ],
                     ];
-                }//end if
-            }//end foreach
-        }//end if
+                }
+            }
+        }
 
         return $dataSource;
-    }//end prepareDataSource()
-}//end class
+    }
+}

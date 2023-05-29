@@ -1,4 +1,12 @@
 <?php
+/*
+ * Navigate Commerce
+ *
+ * @author        Navigate Commerce
+ * @package       Navigate_HomepageBannerSlider
+ * @copyright     Copyright (c) Navigate (https://www.navigatecommerce.com/)
+ * @license       https://www.navigatecommerce.com/end-user-license-agreement
+ */
 
 namespace Navigate\HomepageBannerSlider\Ui\Component\Listing\Columns\Bannerslider;
 
@@ -11,13 +19,12 @@ use Magento\Ui\Component\Listing\Columns\Column;
 
 class Thumbnail extends Column
 {
-    const ALT_FIELD = 'title';
+    protected const ALT_FIELD = 'title';
 
     /**
      * @var \Magento\Store\Model\StoreManagerInterface
      */
     protected $storeManager;
-
 
     /**
      * @param ContextInterface      $context
@@ -41,8 +48,7 @@ class Thumbnail extends Column
         $this->imageHelper  = $imageHelper;
         $this->urlBuilder   = $urlBuilder;
         parent::__construct($context, $uiComponentFactory, $components, $data);
-    }//end __construct()
-
+    }
 
     /**
      * Prepare Data Source
@@ -65,23 +71,26 @@ class Thumbnail extends Column
                 $item[$fieldName.'_src']      = $url;
                 $item[$fieldName.'_alt']      = $this->getAlt($item) ?: '';
                 $item[$fieldName.'_title']    = $item['title'];
-                $item[$fieldName.'_link']     = $this->urlBuilder->getUrl('bannerslider/bannerslider/edit', ['id' => $item['id']]);
+                $item[$fieldName.'_link']     = $this->urlBuilder->getUrl(
+                    'bannerslider/bannerslider/edit',
+                    ['id' => $item['id']]
+                );
                 $item[$fieldName.'_orig_src'] = $url;
             }
         }
 
         return $dataSource;
-    }//end prepareDataSource()
-
+    }
 
     /**
-     * @param array $row
+     * Retrive Alg field
      *
-     * @return null|string
+     * @param array $row
+     * @return void
      */
     protected function getAlt($row)
     {
         $altField = $this->getData('config/altField') ?: self::ALT_FIELD;
         return isset($row[$altField]) ? $row[$altField] : null;
-    }//end getAlt()
-}//end class
+    }
+}

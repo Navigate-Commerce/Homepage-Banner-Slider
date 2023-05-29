@@ -1,4 +1,12 @@
 <?php
+/*
+ * Navigate Commerce
+ *
+ * @author        Navigate Commerce
+ * @package       Navigate_HomepageBannerSlider
+ * @copyright     Copyright (c) Navigate (https://www.navigatecommerce.com/)
+ * @license       https://www.navigatecommerce.com/end-user-license-agreement
+ */
 
 namespace Navigate\HomepageBannerSlider\Controller\Adminhtml\Bannerslider;
 
@@ -11,11 +19,19 @@ class MassDelete extends \Magento\Backend\App\Action
     protected $_filter;
 
     /**
+     * Banner Slider Collection
+     *
      * @var \Navigate\HomepageBannerSlider\Model\ResourceModel\Bannerslider\CollectionFactory
      */
     protected $_collectionFactory;
 
-
+    /**
+     * Construct method
+     *
+     * @param \Magento\Ui\Component\MassAction\Filter $filter
+     * @param \Navigate\HomepageBannerSlider\Model\ResourceModel\Bannerslider\CollectionFactory $collectionFactory
+     * @param \Magento\Backend\App\Action\Context $context
+     */
     public function __construct(
         \Magento\Ui\Component\MassAction\Filter $filter,
         \Navigate\HomepageBannerSlider\Model\ResourceModel\Bannerslider\CollectionFactory $collectionFactory,
@@ -24,9 +40,13 @@ class MassDelete extends \Magento\Backend\App\Action
         $this->_filter            = $filter;
         $this->_collectionFactory = $collectionFactory;
         parent::__construct($context);
-    }//end __construct()
+    }
 
-
+    /**
+     * Execute function
+     *
+     * @return void
+     */
     public function execute()
     {
         try {
@@ -38,12 +58,14 @@ class MassDelete extends \Magento\Backend\App\Action
                 $itemsDelete++;
             }
 
-            $this->messageManager->addSuccess(__('A total of %1 Bannerslider(s) were deleted successfully.', $itemsDelete));
+            $this->messageManager->addSuccess(
+                __('A total of %1 Bannerslider(s) were deleted successfully.', $itemsDelete)
+            );
         } catch (Exception $e) {
             $this->messageManager->addError('Something went wrong while deleting the Bannerslider '.$e->getMessage());
         }
 
         $resultRedirect = $this->resultRedirectFactory->create();
         return $resultRedirect->setPath('bannerslider/bannerslider/index');
-    }//end execute()
-}//end class
+    }
+}

@@ -1,4 +1,12 @@
 <?php
+/*
+ * Navigate Commerce
+ *
+ * @author        Navigate Commerce
+ * @package       Navigate_HomepageBannerSlider
+ * @copyright     Copyright (c) Navigate (https://www.navigatecommerce.com/)
+ * @license       https://www.navigatecommerce.com/end-user-license-agreement
+ */
 
 namespace Navigate\HomepageBannerSlider\Controller\Adminhtml\Bannerslider;
 
@@ -12,7 +20,6 @@ class Edit extends \Magento\Backend\App\Action
      * @var Registry|null
      */
     protected $_coreRegistry = null;
-
 
     /**
      * Edit constructor.
@@ -32,9 +39,13 @@ class Edit extends \Magento\Backend\App\Action
         $this->resultPageFactory   = $resultPageFactory;
         $this->_coreRegistry       = $registry;
         $this->bannersliderFactory = $bannersliderFactory;
-    }//end __construct()
+    }
 
-
+    /**
+     * Execute function
+     *
+     * @return void
+     */
     public function execute()
     {
         $bannerslider = $this->getRequest()->getParam('id');
@@ -43,7 +54,7 @@ class Edit extends \Magento\Backend\App\Action
         $this->_coreRegistry->register('bannerslider', $model);
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('Navigate_HomepageBannerSlider::bannerslider');
-        $resultPage->getConfig()->getTitle()->prepend($bannerslider ? __('Edit Banner "'.$model->getTitle().'"') : __('New Bannerslider'));
+        $resultPage->getConfig()->getTitle()->prepend($bannerslider ? __('Edit Banner "'.$model->getTitle().'"') : __('New Bannerslider')); // phpcs:ignore
         return $resultPage;
-    }//end execute()
-}//end class
+    }
+}

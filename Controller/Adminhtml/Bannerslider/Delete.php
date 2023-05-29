@@ -1,4 +1,12 @@
 <?php
+/*
+ * Navigate Commerce
+ *
+ * @author        Navigate Commerce
+ * @package       Navigate_HomepageBannerSlider
+ * @copyright     Copyright (c) Navigate (https://www.navigatecommerce.com/)
+ * @license       https://www.navigatecommerce.com/end-user-license-agreement
+ */
 
 namespace Navigate\HomepageBannerSlider\Controller\Adminhtml\Bannerslider;
 
@@ -14,11 +22,19 @@ class Delete extends \Magento\Backend\App\Action
     protected $resultPageFactory = false;
 
     /**
+     * Manager Interface
+     *
      * @var \Magento\Framework\Message\ManagerInterface
      */
     protected $messageManager;
 
-
+    /**
+     * Construct method
+     *
+     * @param \Magento\Backend\App\Action\Context $context
+     * @param \Magento\Framework\Message\ManagerInterface $messageManager
+     * @param BannersliderFactory $bannersliderFactory
+     */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         \Magento\Framework\Message\ManagerInterface $messageManager,
@@ -28,9 +44,13 @@ class Delete extends \Magento\Backend\App\Action
         $this->_resultFactory      = $context->getResultFactory();
         $this->bannersliderFactory = $bannersliderFactory;
         $this->messageManager      = $messageManager;
-    }//end __construct()
+    }
 
-
+    /**
+     * Execute function
+     *
+     * @return void
+     */
     public function execute()
     {
         $id = $this->getRequest()->getParam('id');
@@ -51,5 +71,5 @@ class Delete extends \Magento\Backend\App\Action
         $resultRedirect = $this->_resultFactory->create(ResultFactory::TYPE_REDIRECT);
         $resultRedirect->setPath('bannerslider/bannerslider/index');
         return $resultRedirect;
-    }//end execute()
-}//end class
+    }
+}

@@ -1,4 +1,12 @@
 <?php
+/*
+ * Navigate Commerce
+ *
+ * @author        Navigate Commerce
+ * @package       Navigate_HomepageBannerSlider
+ * @copyright     Copyright (c) Navigate (https://www.navigatecommerce.com/)
+ * @license       https://www.navigatecommerce.com/end-user-license-agreement
+ */
 
 namespace Navigate\HomepageBannerSlider\Block\Adminhtml\Bannerslider;
 
@@ -14,7 +22,6 @@ class Edit extends Container
      */
     protected $_coreRegistry = null;
 
-
     /**
      * Edit constructor.
      *
@@ -29,8 +36,7 @@ class Edit extends Container
     ) {
         $this->_coreRegistry = $registry;
         parent::__construct($context, $data);
-    }//end __construct()
-
+    }
 
     /**
      * Intialize constructor
@@ -62,11 +68,12 @@ class Edit extends Container
             ],
             10
         );
-    }//end _construct()
-
+    }
 
     /**
-     * @return Container
+     * Undocumented function
+     *
+     * @return void
      */
     protected function _prepareLayout()
     {
@@ -79,8 +86,7 @@ class Edit extends Container
                 }
             };
         ";
-        // $this->removeButton('delete');
         $this->removeButton('reset');
         return parent::_prepareLayout();
-    }//end _prepareLayout()
-}//end class
+    }
+}

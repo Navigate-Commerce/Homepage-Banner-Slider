@@ -1,4 +1,12 @@
 <?php
+/*
+ * Navigate Commerce
+ *
+ * @author        Navigate Commerce
+ * @package       Navigate_HomepageBannerSlider
+ * @copyright     Copyright (c) Navigate (https://www.navigatecommerce.com/)
+ * @license       https://www.navigatecommerce.com/end-user-license-agreement
+ */
 
 namespace Navigate\HomepageBannerSlider\Block\Adminhtml\Bannerslider\Edit\Tab;
 
@@ -10,7 +18,6 @@ use Magento\Framework\Data\FormFactory;
 
 class Info extends Generic implements TabInterface
 {
-
 
     /**
      * Info constructor.
@@ -30,10 +37,11 @@ class Info extends Generic implements TabInterface
     ) {
         $this->_coreSession = $coreSession;
         parent::__construct($context, $registry, $formFactory, $data);
-    }//end __construct()
-
+    }
 
     /**
+     * Prpeare form
+     *
      * @return Generic
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -97,7 +105,6 @@ class Info extends Generic implements TabInterface
             ]
         );
 
-
         $fieldset->addField(
             'enable_button',
             'select',
@@ -128,10 +135,6 @@ class Info extends Generic implements TabInterface
                 'required' => true,
             ]
         );
-
-
-
-
 
         $fieldset->addField(
             'text_position',
@@ -165,7 +168,6 @@ class Info extends Generic implements TabInterface
             ]
         );
 
-
         $fieldset->addField(
             'url_key',
             'text',
@@ -195,7 +197,6 @@ class Info extends Generic implements TabInterface
             ]
         );
 
-
         $fieldset->addField(
             'imagename',
             'image',
@@ -220,8 +221,6 @@ class Info extends Generic implements TabInterface
             ]
         );
 
-        
-
         $fieldset->addField(
             'position',
             'text',
@@ -231,8 +230,6 @@ class Info extends Generic implements TabInterface
                 'comment' => __('Position'),
                 'class'   => 'validate-number',
                 'note'=>"<script type='text/javascript'>
-    
-
 require([
     'jquery'
 ], function ($) {
@@ -289,41 +286,45 @@ require([
         $this->setForm($form);
 
         return parent::_prepareForm();
-    }//end _prepareForm()
-
+    }
 
     /**
+     * Get Label
+     *
      * @return \Magento\Framework\Phrase|string
      */
     public function getTabLabel()
     {
         return __('Bannerslider');
-    }//end getTabLabel()
-
+    }
 
     /**
+     * Get Tab Title
+     *
      * @return \Magento\Framework\Phrase|string
      */
     public function getTabTitle()
     {
         return __('Bannerslider');
-    }//end getTabTitle()
-
+    }
 
     /**
+     * Check Tab Can show
+     *
      * @return boolean
      */
     public function canShowTab()
     {
         return true;
-    }//end canShowTab()
-
+    }
 
     /**
+     * Check if it is hidden
+     *
      * @return boolean
      */
     public function isHidden()
     {
         return false;
-    }//end isHidden()
-}//end class
+    }
+}

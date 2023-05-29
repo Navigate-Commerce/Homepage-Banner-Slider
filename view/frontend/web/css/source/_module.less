@@ -1,139 +1,129 @@
-/**
- * Navigate
+/*
+ * Navigate Commerce
  *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Navigate.com license that is
- * available through the world-wide-web at this URL:
- * https://www.navigate.com/LICENSE.txt
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade this extension to newer
- * version in the future.
- *
- * @category    Navigate
- * @package     Navigate_HomepageBannerSlider
- * @copyright   Copyright (c) Navigate (http://www.navigate.com/)
- * @license     https://www.navigate.com/LICENSE.txt
+ * @author        Navigate Commerce
+ * @package       Navigate_HomepageBannerSlider
+ * @copyright     Copyright (c) Navigate (https://www.navigatecommerce.com/)
+ * @license       https://www.navigatecommerce.com/end-user-license-agreement
  */
-
+ @color-hp-slider-color-white: #fff;
+ @color-hp-slider-color-blue: #1979c3;
 
 & when (@media-common = true) {
   
     .cms-index-index {
-        .blocks-promo{
+        .blocks-promo {
             display: none;
         }
 
         .nav-sections,
-        .page-header{
+        .page-header {
             margin-bottom: 0;
         }
 
     }
 
-    .main_home_slider-img{
+    .main-home-slider-img {
         position: relative;
 
-        img{
+        img {
             height: 450px;
             object-fit: cover;
         }
 
     }
 
-    .main_home_slider{
+    .main-home-slider {
         &.owl-theme {
-            .owl-dots{
-                position: absolute;
+            .owl-dots {
                 bottom: 20px;
+                position: absolute;
                 text-align: center;
                 width: 100%;
             }
 
-            .owl-nav button{
+            .owl-nav button {
                 &.owl-prev,
-                &.owl-next{
+                &.owl-next {
+                    color: @color-hp-slider-color-white;
+                    font-size: 50px;
+                    font-weight: 300;
+                    left: 20px;
                     position: absolute;
                     top: 40%;
-                    left: 20px;
-                    font-size: 50px;
-                    color: #fff;
-                    font-weight: 300;
                 }
 
-                &.owl-next{
-                    right: 20px;
+                &.owl-next {
                     left: unset;
+                    right: 20px;
                 }
 
             }
         }
     }
 
-    .main_home_slider-info{
-        position: absolute;
-        top: 0px;
-        left: 0%;
-        display: flex;
-        justify-content: center;
+    .main-home-slider-info {
         align-items: center;
+        display: flex;
         height: ~'calc(100% - 40px)';
-        width: ~'calc(100% - 40px)';
+        justify-content: center;
+        left: 0%;
         padding: 20px;
+        position: absolute;
+        top: 0;
+        width: ~'calc(100% - 40px)';
 
-        &-inner{
+        &-inner {
             text-align: center;
         }
 
-        &-title{
-            margin: 0 0 25px 0;
+        &-title {
+            color: @color-hp-slider-color-white;
             font-size: 28px;
-            color: #fff;
+            margin: 0 0 25px 0;
         }
 
         &-button {
-            font-size: 1.8rem;
+            background: @color-hp-slider-color-blue;
             background-image: none;
-            background: #1979c3;
-            padding: 7px 15px;
-            color: #fff;
-            border: 1px solid #1979c3;
+            border: 1px solid @color-hp-slider-color-blue;
+            border-radius: 3px;
+            box-sizing: border-box;
+            color: @color-hp-slider-color-white;
             cursor: pointer;
             display: inline-block;
+            font-size: 1.8rem;
             font-size: 1.4rem;
             font-weight: 700;
-            box-sizing: border-box;
-            vertical-align: middle;
-            border-radius: 3px;
-            text-decoration: none;
+            padding: 7px 15px;
             padding: 10px 15px;
+            text-decoration: none;
+            vertical-align: middle;
             &:hover,
-            &:visited{
-                color: #fff;
+            &:visited {
+                color: @color-hp-slider-color-white;
                 text-decoration: none;
             }
         }
 
-        .top-left &{
-            justify-content: flex-start;
+        .top-left & {
             align-items: flex-start;
-        }
-
-        .top-right &{
-            justify-content: flex-end;
-            align-items: flex-start;
-        }
-
-        .bottom-left &{
             justify-content: flex-start;
-            align-items: flex-end;
         }
 
-        .bottom-right &{
+        .top-right & {
+            align-items: flex-start;
             justify-content: flex-end;
+        }
+
+        .bottom-left & {
             align-items: flex-end;
+            justify-content: flex-start;
+        }
+
+        .bottom-right & {
+            align-items: flex-end;
+            justify-content: flex-end;
         }
 
     }

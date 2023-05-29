@@ -1,12 +1,22 @@
 <?php
+/*
+ * Navigate Commerce
+ *
+ * @author        Navigate Commerce
+ * @package       Navigate_HomepageBannerSlider
+ * @copyright     Copyright (c) Navigate (https://www.navigatecommerce.com/)
+ * @license       https://www.navigatecommerce.com/end-user-license-agreement
+ */
 
 namespace Navigate\HomepageBannerSlider\Controller\Adminhtml\Bannerslider;
 
 class Index extends \Magento\Backend\App\Action
 {
 
+    /**
+     * @var boolean
+     */
     protected $resultPageFactory = false;
-
 
     /**
      * Index constructor.
@@ -20,9 +30,13 @@ class Index extends \Magento\Backend\App\Action
     ) {
         parent::__construct($context);
         $this->resultPageFactory = $resultPageFactory;
-    }//end __construct()
+    }
 
-
+    /**
+     * Execute function
+     *
+     * @return void
+     */
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
@@ -30,5 +44,5 @@ class Index extends \Magento\Backend\App\Action
         $resultPage->setActiveMenu('Navigate_HomepageBannerSlider::bannerslider');
         $resultPage->addBreadcrumb(__('Homepage Banner Slider'), __('Homepage Banner Slider'));
         return $resultPage;
-    }//end execute()
-}//end class
+    }
+}
