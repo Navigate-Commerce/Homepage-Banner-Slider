@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Navigate Commerce
  *
  * @author        Navigate Commerce
@@ -12,7 +12,6 @@ namespace Navigate\HomepageBannerSlider\Model;
 
 class Bannerslider extends \Magento\Framework\Model\AbstractModel
 {
-
     /**
      * Initialize construct Navigate\HomepageBannerSlider\Model\Bannerslider
      */

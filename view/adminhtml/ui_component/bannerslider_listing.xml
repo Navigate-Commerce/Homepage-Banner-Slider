@@ -58,6 +58,7 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="selectProvider" xsi:type="string">bannerslider_listing.bannerslider_listing.bannerslider_columns.ids</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
                     <item name="indexField" xsi:type="string">id</item>
                 </item>
             </argument>
@@ -73,6 +74,13 @@
                         </item>
                     </item>
                 </argument>
+            </action>
+            <action name="change_status">
+                <settings>
+                    <type>change_status</type>
+                    <label translate="true">Change Status</label>
+                    <actions class="Navigate\HomepageBannerSlider\Ui\Component\Listing\Columns\Bannerslider\MassStatus"/>
+                </settings>
             </action>
         </massaction>
         <bookmark name="bookmark"/>
@@ -147,7 +155,7 @@
                     <item name="dataType" xsi:type="string">date</item>
                     <item name="label" xsi:type="string" translate="true">Created At</item>
                     <item name="dateFormat" xsi:type="string">dd-MM-Y</item>
-                    <item name="sortOrder" xsi:type="number">80</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
                 </item>
             </argument>
         </column>

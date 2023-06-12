@@ -1,4 +1,4 @@
-/*
+/**
  * Navigate Commerce
  *
  * @author        Navigate Commerce
@@ -10,12 +10,10 @@
  @color-hp-slider-color-blue: #1979c3;
 
 & when (@media-common = true) {
-  
     .cms-index-index {
         .blocks-promo {
             display: none;
         }
-
         .nav-sections,
         .page-header {
             margin-bottom: 0;
@@ -24,15 +22,14 @@
     }
 
     .main-home-slider-img {
+        display: none;
         position: relative;
-
         img {
             height: 450px;
             object-fit: cover;
+            width: 100%;
         }
-
     }
-
     .main-home-slider {
         &.owl-theme {
             .owl-dots {
@@ -125,7 +122,5 @@
             align-items: flex-end;
             justify-content: flex-end;
         }
-
     }
-
 }

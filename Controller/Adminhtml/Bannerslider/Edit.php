@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Navigate Commerce
  *
  * @author        Navigate Commerce
@@ -10,34 +10,45 @@
 
 namespace Navigate\HomepageBannerSlider\Controller\Adminhtml\Bannerslider;
 
-use Navigate\HomepageBannerSlider\Model\BannersliderFactory;
 use Magento\Framework\Registry;
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\View\Result\PageFactory;
+use Navigate\HomepageBannerSlider\Model\BannersliderFactory;
 
 class Edit extends \Magento\Backend\App\Action
 {
-
     /**
-     * @var Registry|null
+     * @var boolean
      */
-    protected $_coreRegistry = null;
+    protected $resultPageFactory = false;
 
     /**
-     * Edit constructor.
+     * @var Registry
+     */
+    protected $registry;
+
+    /**
+     * @var BannersliderFactory
+     */
+    protected $bannersliderFactory;
+
+    /**
+     * Edit Construct method
      *
-     * @param \Magento\Backend\App\Action\Context        $context
-     * @param Registry                                   $registry
-     * @param BannersliderFactory                        $bannersliderFactory
-     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     * @param Context $context
+     * @param Registry $registry
+     * @param PageFactory $resultPageFactory
+     * @param BannersliderFactory $bannersliderFactory
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
+        Context $context,
         Registry $registry,
-        BannersliderFactory $bannersliderFactory,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory
+        PageFactory $resultPageFactory,
+        BannersliderFactory $bannersliderFactory
     ) {
         parent::__construct($context);
-        $this->resultPageFactory   = $resultPageFactory;
         $this->_coreRegistry       = $registry;
+        $this->resultPageFactory   = $resultPageFactory;
         $this->bannersliderFactory = $bannersliderFactory;
     }
 
@@ -49,8 +60,7 @@ class Edit extends \Magento\Backend\App\Action
     public function execute()
     {
         $bannerslider = $this->getRequest()->getParam('id');
-        $model        = $this->bannersliderFactory->create();
-        $model->load($bannerslider);
+        $model        = $this->bannersliderFactory->create()->load($bannerslider);
         $this->_coreRegistry->register('bannerslider', $model);
         $resultPage = $this->resultPageFactory->create();
         $resultPage->setActiveMenu('Navigate_HomepageBannerSlider::bannerslider');

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Navigate Commerce
  *
  * @author        Navigate Commerce
@@ -10,51 +10,62 @@
 
 namespace Navigate\HomepageBannerSlider\Controller\Adminhtml\Bannerslider;
 
-use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Filesystem;
+use Magento\Backend\App\Action\Context;
 use Magento\Framework\Filesystem\Io\File;
+use Magento\Framework\Controller\ResultFactory;
+use Magento\MediaStorage\Model\File\UploaderFactory;
+use Navigate\HomepageBannerSlider\Model\BannersliderFactory;
 
 class Save extends \Magento\Backend\App\Action
 {
-
     /**
      * @var boolean
      */
     protected $resultPageFactory = false;
 
     /**
-     * @var \Magento\MediaStorage\Model\File\UploaderFactory
+     * @var File
+     */
+    protected $fileIo;
+
+    /**
+     * @var Filesystem
+     */
+    protected $filesystem;
+
+    /**
+     * @var UploaderFactory
      */
     protected $uploader;
 
     /**
-     * @var \Magento\Framework\Filesystem
+     * @var BannersliderFactory
      */
-    protected $_mediaDirectory;
+    protected $bannersliderFactory;
 
     /**
      * Construct method
      *
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Navigate\HomepageBannerSlider\Model\BannersliderFactory $bannersliderFactory
-     * @param \Magento\MediaStorage\Model\File\UploaderFactory $uploader
-     * @param \Magento\Framework\Filesystem $filesystem
+     * @param Context $context
      * @param File $fileIo
+     * @param Filesystem $filesystem
+     * @param UploaderFactory $uploader
+     * @param BannersliderFactory $bannersliderFactory
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Navigate\HomepageBannerSlider\Model\BannersliderFactory $bannersliderFactory,
-        \Magento\MediaStorage\Model\File\UploaderFactory $uploader,
-        \Magento\Framework\Filesystem $filesystem,
-        File $fileIo
+        Context $context,
+        File $fileIo,
+        Filesystem $filesystem,
+        UploaderFactory $uploader,
+        BannersliderFactory $bannersliderFactory
     ) {
         parent::__construct($context);
         $this->_resultFactory      = $context->getResultFactory();
-        $this->bannersliderFactory = $bannersliderFactory;
-        $this->uploader            = $uploader;
-        $this->_mediaDirectory     = $filesystem->getDirectoryWrite(
-            \Magento\Framework\App\Filesystem\DirectoryList::MEDIA
-        );
         $this->fileIo              = $fileIo;
+        $this->filesystem          = $filesystem;
+        $this->uploader            = $uploader;
+        $this->bannersliderFactory = $bannersliderFactory;
     }
 
     /**
@@ -65,12 +76,13 @@ class Save extends \Magento\Backend\App\Action
     public function execute()
     {
         $data     = $this->getRequest()->getParams();
-        $target   = $this->_mediaDirectory->getAbsolutePath('Navigate/Slider/');
-        $delImage = $this->_mediaDirectory->getAbsolutePath();
+        $mediaDirectory     = $this->filesystem->getDirectoryWrite(
+            \Magento\Framework\App\Filesystem\DirectoryList::MEDIA
+        );
+        $target   = $mediaDirectory->getAbsolutePath('Navigate/Slider/');
+        $delImage = $mediaDirectory->getAbsolutePath();
         $ImgFiles = $this->getRequest()->getFiles('imagename')['name'];
-
         $MobileImgFiles = $this->getRequest()->getFiles('mobileimagename')['name'];
-
         $model = $this->bannersliderFactory->create();
 
         try {
@@ -98,13 +110,7 @@ class Save extends \Magento\Backend\App\Action
             // end mobile logic
             if (isset($ImgFiles) && $ImgFiles != '') {
                 try {
-                    $allowed_file_types = [
-                        'jpg',
-                        'jpeg',
-                        'png',
-                        'svg',
-                        'gif'
-                    ];
+                    $allowed_file_types = ['jpg', 'jpeg', 'png', 'svg', 'gif'];
                     $uploader           = $this->uploader->create(['fileId' => 'imagename']);
                     if (in_array($uploader->getFileExtension(), $allowed_file_types)) {
                         $filename             = '';
@@ -139,13 +145,7 @@ class Save extends \Magento\Backend\App\Action
             // Mobile image upload
             if (isset($MobileImgFiles) && $MobileImgFiles != '') {
                 try {
-                    $allowed_file_types = [
-                        'jpg',
-                        'jpeg',
-                        'png',
-                        'svg',
-                        'gif'
-                    ];
+                    $allowed_file_types = ['jpg', 'jpeg', 'png', 'svg', 'gif'];
                     $uploader           = $this->uploader->create(['fileId' => 'mobileimagename']);
                     if (in_array($uploader->getFileExtension(), $allowed_file_types)) {
                         $filename             = '';
@@ -186,6 +186,11 @@ class Save extends \Magento\Backend\App\Action
             }
 
             try {
+                if (isset($data['store_id']) && !empty($data['store_id'])) {
+                    $data['store_id'] = implode(',', $data['store_id']);
+                } else {
+                    $data['store_id'] = 0;
+                }
                 $model->setData($data)->setId($id);
                 $model->save();
                 $this->messageManager->addSuccess('Bannerslider succesfully added.');
@@ -197,18 +202,16 @@ class Save extends \Magento\Backend\App\Action
         }
 
         $resultRedirect = $this->_resultFactory->create(ResultFactory::TYPE_REDIRECT);
-
         if ($this->getRequest()->getParam('back')) {
-                    return $resultRedirect->setPath(
-                        '*/*/edit',
-                        [
-                            'id'       => $model->getId(),
-                            '_current' => true,
-                        ]
-                    );
+            return $resultRedirect->setPath(
+                '*/*/edit',
+                [
+                    'id'       => $model->getId(),
+                    '_current' => true,
+                ]
+            );
         }
-
-        $resultRedirect->setPath('bannerslider/bannerslider/index');
+        $resultRedirect->setPath('*/*/index');
         return $resultRedirect;
     }
 }

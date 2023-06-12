@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Navigate Commerce
  *
  * @author        Navigate Commerce
@@ -12,7 +12,6 @@ namespace Navigate\HomepageBannerSlider\Ui\Component\Listing\Columns\Bannerslide
 
 class Status implements \Magento\Framework\Data\OptionSourceInterface
 {
-
     /**
      * To-option array
      *

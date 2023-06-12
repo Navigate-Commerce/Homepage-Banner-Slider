@@ -12,10 +12,11 @@
     <head>
         <css src="Navigate_HomepageBannerSlider::css/owl.carousel.min.css" />
         <css src="Navigate_HomepageBannerSlider::css/owl.theme.css" />
+        <link src="Navigate_HomepageBannerSlider::js/HomepageBannerSlider.js" />
     </head>
     <body>
         <referenceContainer name="page.wrapper">
-             <block ifconfig="bannerslider/general/enable" class="Navigate\HomepageBannerSlider\Block\Bannerslider\Index" name="main_slider" template="Navigate_HomepageBannerSlider::slider/slider.phtml" after="page.top"/>
+            <block ifconfig="bannerslider/general/enable" class="Navigate\HomepageBannerSlider\Block\Bannerslider\Index" name="main_slider" template="Navigate_HomepageBannerSlider::slider/slider.phtml" after="page.top"/>
         </referenceContainer>
     </body>
 </page>

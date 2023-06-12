@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Navigate Commerce
  *
  * @author        Navigate Commerce
@@ -15,27 +15,31 @@ use Magento\Backend\Block\Widget\Tab\TabInterface;
 use Magento\Backend\Block\Template\Context;
 use Magento\Framework\Registry;
 use Magento\Framework\Data\FormFactory;
+use Magento\Cms\Model\Wysiwyg\Config as WysiwygConfig;
+use Magento\Store\Model\System\Store as SystemStore;
 
 class Info extends Generic implements TabInterface
 {
-
     /**
      * Info constructor.
      *
-     * @param Context                                            $context
-     * @param Registry                                           $registry
-     * @param FormFactory                                        $formFactory
-     * @param \Magento\Framework\Session\SessionManagerInterface $coreSession
-     * @param array                                              $data
+     * @param Context       $context
+     * @param Registry      $registry
+     * @param FormFactory   $formFactory
+     * @param WysiwygConfig $wysiwygConfig
+     * @param SystemStore   $systemStore
+     * @param array         $data
      */
     public function __construct(
         Context $context,
         Registry $registry,
         FormFactory $formFactory,
-        \Magento\Framework\Session\SessionManagerInterface $coreSession,
+        WysiwygConfig $wysiwygConfig,
+        SystemStore $systemStore,
         array $data = []
     ) {
-        $this->_coreSession = $coreSession;
+        $this->wysiwygConfig = $wysiwygConfig;
+        $this->systemStore   = $systemStore;
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
@@ -95,13 +99,29 @@ class Info extends Generic implements TabInterface
 
         $fieldset->addField(
             'slidertitle',
-            'text',
+            'editor',
             [
-                'name'    => 'slidertitle',
-                'label'   => __('Slider Title'),
-                'comment' => __('Slider Title'),
+                'name' => 'slidertitle',
+                'label' => __('Desktop Slider Title'),
+                'title' => __('Desktop Slider Title'),
+                'style' => 'height:1px',
+                'required' => false,
+                'config' => $this->wysiwygConfig->getConfig(),
                 'note'    => 'Display title on the image.',
+            ]
+        );
 
+        $fieldset->addField(
+            'mobileslider_title',
+            'editor',
+            [
+                'name' => 'mobileslider_title',
+                'label' => __('Mobile Slider Title'),
+                'title' => __('Mobile Slider Title'),
+                'style' => 'height:1px',
+                'required' => false,
+                'config' => $this->wysiwygConfig->getConfig(),
+                'note'    => 'Display title on the image.',
             ]
         );
 
@@ -188,12 +208,11 @@ class Info extends Generic implements TabInterface
                 'name'    => 'open_new_tab',
                 'label'   => __('Open Link In New Tab'),
                 'comment' => __('Open Link In New Tab'),
-                'default'=>'1',
-                'value' => 1,
-                'values'    => [
-                                 ['label' => 'Yes', 'value' => 1],
-                                 ['label' => 'No', 'value' => 0]
-                               ]
+                'default' => '1',
+                'value'   => 1,
+                'values'  => [
+                    ['label' => 'Yes', 'value' => 1],
+                    ['label' => 'No', 'value' => 0]]
             ]
         );
 
@@ -217,7 +236,6 @@ class Info extends Generic implements TabInterface
                 'label'   => __('Mobile Image'),
                 'comment' => __('Mobile Image'),
                 'note'    => 'Maximum file size: 2 MB. Allowed file types: jpg,jpeg,png,svg,gif',
-
             ]
         );
 
@@ -229,62 +247,60 @@ class Info extends Generic implements TabInterface
                 'label'   => __('Position'),
                 'comment' => __('Position'),
                 'class'   => 'validate-number',
-                'note'=>"<script type='text/javascript'>
-require([
-    'jquery'
-], function ($) {
-    'use strict';
-    jQuery(document).ready(function(){
-        
-         function updatefeilds() {
-          var enable_button = $('#enable_button').val();
-
-         if(enable_button=='1')
-         {
-
-           $('#buttontitle').addClass('required-entry');
-           $('#buttontitle').parent().parent().show(); 
-           $('#text_position').parent().parent().show(); 
-           $('#url_key').parent().parent().show();
-           $('#url_key').addClass('required-entry'); 
-           $('#open_new_tab').parent().parent().show();
-
-         }else{
-
-           $('#buttontitle').removeClass('required-entry');
-           $('#buttontitle').parent().parent().hide(); 
-           $('#text_position').parent().parent().hide(); 
-           $('#url_key').parent().parent().hide();
-           $('#url_key').removeClass('required-entry'); 
-           $('#open_new_tab').parent().parent().hide();
-        
-        }
-}
-
-        $('#enable_button').change(function(){
-            updatefeilds();
-        });
-
-      var pathname = window.location.pathname;
-       if(pathname.includes('new')){
-         $('#open_new_tab').val(1);
-         $('#text_position').val('center');
-       }
-      
-
-        setInterval(updatefeilds, 500);
-});
-
-
-});
-</script>"
+                'note'=>   "<script type='text/javascript'>
+                            require([
+                                'jquery'
+                            ], function ($) {
+                                'use strict';
+                                jQuery(document).ready(function(){
+                                    function updatefeilds() {
+                                        var enable_button = $('#enable_button').val();
+                                        if(enable_button=='1')
+                                        {
+                                            $('#buttontitle').addClass('required-entry');
+                                            $('#buttontitle').parent().parent().show(); 
+                                            $('#text_position').parent().parent().show(); 
+                                            $('#url_key').parent().parent().show();
+                                            $('#url_key').addClass('required-entry'); 
+                                            $('#open_new_tab').parent().parent().show();
+                                        } else {
+                                           $('#buttontitle').removeClass('required-entry');
+                                           $('#buttontitle').parent().parent().hide(); 
+                                           $('#text_position').parent().parent().hide(); 
+                                           $('#url_key').parent().parent().hide();
+                                           $('#url_key').removeClass('required-entry'); 
+                                           $('#open_new_tab').parent().parent().hide();
+                                        }
+                                    }
+                                    $('#enable_button').change(function(){
+                                        updatefeilds();
+                                    });
+                                    var pathname = window.location.pathname;
+                                    if(pathname.includes('new')){
+                                        $('#open_new_tab').val(1);
+                                        $('#text_position').val('center');
+                                    }
+                                    setInterval(updatefeilds, 500);
+                                });
+                            });
+                            </script>"
             ]
         );
 
+        $fieldset->addField(
+            'store_id',
+            'multiselect',
+            [
+                'name'     => 'store_id[]',
+                'label'    => __('Store Views'),
+                'title'    => __('Store Views'),
+                'required' => true,
+                'values'   => $this->systemStore->getStoreValuesForForm(false, true),
+            ]
+        );
         $data = $model->getData();
         $form->setValues($data);
         $this->setForm($form);
-
         return parent::_prepareForm();
     }
 

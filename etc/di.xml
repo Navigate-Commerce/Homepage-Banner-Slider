@@ -23,6 +23,19 @@
             <argument name="resourceModel" xsi:type="string">Navigate\HomepageBannerSlider\Model\ResourceModel\Bannerslider\Collection</argument>
         </arguments>
     </virtualType>
+
+    <type name="Navigate\HomepageBannerSlider\Ui\Component\Listing\Columns\Bannerslider\MassStatus">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="urlPath" xsi:type="string">bannerslider/bannerslider/massStatus</item>
+                <item name="paramName" xsi:type="string">status</item>
+                <item name="confirm" xsi:type="array">
+                    <item name="title" xsi:type="string" translatable="true">Change Status</item>
+                    <item name="message" xsi:type="string" translatable="true">Are you sure to change the active status of selected HomepageBannerSlider(s)?</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
 </config>
 
 

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Navigate Commerce
  *
  * @author        Navigate Commerce
@@ -10,34 +10,36 @@
 
 namespace Navigate\HomepageBannerSlider\Controller\Adminhtml\Bannerslider;
 
+use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\View\Result\ForwardFactory;
+
 class NewAction extends \Magento\Backend\App\Action
 {
-
     /**
      * ForwardFactory
      *
-     * @var \Magento\Backend\Model\View\Result\ForwardFactory
+     * @var ForwardFactory
      */
     protected $resultForwardFactory;
 
     /**
      * NewAction constructor.
      *
-     * @param \Magento\Backend\App\Action\Context               $context
-     * @param \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory
+     * @param Context $context
+     * @param ForwardFactory $resultForwardFactory
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory
+        Context $context,
+        ForwardFactory $resultForwardFactory
     ) {
         $this->resultForwardFactory = $resultForwardFactory;
         parent::__construct($context);
     }
     
     /**
-     * Index action
+     * New Action Execute Method
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return ForwardFactory
      */
     public function execute()
     {

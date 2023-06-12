@@ -24,7 +24,6 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
             </group>
-
             <group id="slider" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20">
                 <label>Slider Settings</label>
                 <depends>

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Navigate Commerce
  *
  * @author        Navigate Commerce
@@ -10,40 +10,44 @@
 
 namespace Navigate\HomepageBannerSlider\Controller\Adminhtml\Bannerslider;
 
-use Navigate\HomepageBannerSlider\Model\BannersliderFactory;
+use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Message\ManagerInterface;
+use Navigate\HomepageBannerSlider\Model\BannersliderFactory;
 
 class Delete extends \Magento\Backend\App\Action
 {
-
     /**
      * @var boolean
      */
     protected $resultPageFactory = false;
 
     /**
-     * Manager Interface
-     *
-     * @var \Magento\Framework\Message\ManagerInterface
+     * @var ManagerInterface
      */
     protected $messageManager;
 
     /**
-     * Construct method
+     * @var BannersliderFactory
+     */
+    protected $bannersliderFactory;
+
+    /**
+     * Delete Construct method
      *
-     * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Message\ManagerInterface $messageManager
+     * @param Context $context
+     * @param ManagerInterface $messageManager
      * @param BannersliderFactory $bannersliderFactory
      */
     public function __construct(
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Message\ManagerInterface $messageManager,
+        Context $context,
+        ManagerInterface $messageManager,
         BannersliderFactory $bannersliderFactory
     ) {
         parent::__construct($context);
         $this->_resultFactory      = $context->getResultFactory();
-        $this->bannersliderFactory = $bannersliderFactory;
         $this->messageManager      = $messageManager;
+        $this->bannersliderFactory = $bannersliderFactory;
     }
 
     /**
@@ -56,9 +60,7 @@ class Delete extends \Magento\Backend\App\Action
         $id = $this->getRequest()->getParam('id');
         if ($id) {
             try {
-                $model = $this->bannersliderFactory->create();
-                $model->load($id);
-                $data = $model->getData();
+                $model = $this->bannersliderFactory->create()->load($id);
                 $model->delete();
                 $this->messageManager->addSuccess(__('Bannerslider deleted successfully.'));
             } catch (\Exception $e) {
@@ -69,7 +71,7 @@ class Delete extends \Magento\Backend\App\Action
         }
 
         $resultRedirect = $this->_resultFactory->create(ResultFactory::TYPE_REDIRECT);
-        $resultRedirect->setPath('bannerslider/bannerslider/index');
+        $resultRedirect->setPath('*/*/index');
         return $resultRedirect;
     }
 }

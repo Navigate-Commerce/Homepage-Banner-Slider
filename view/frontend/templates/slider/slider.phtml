@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * Navigate Commerce
  *
  * @author        Navigate Commerce
@@ -8,112 +8,94 @@
  * @license       https://www.navigatecommerce.com/end-user-license-agreement
  */
 
-$collection = $block->getSliderCollection();
 $slidercount = 0;
-$slidercount     = $collection->count();
-$mediaUrl = $block->getMediaUrl();
-if ($slidercount > 0) {
-    ?>
+$isEnableSlider = "";
+$collection  = $block->getSliderCollection();
+$slidercount = $collection->count();
+$mediaUrl    = $block->getMediaUrl();
+$sliderLoop  = $block->getSliderLoop();
+$sliderDots  = $block->getSliderDots();
+$sliderArrow = $block->getSliderArrow();
+$sliderAutoplay = $block->getSliderAutoplay();
+$sliderDesktopItem = $block->getDesktopItemCount();
+$sliderMobileItem  = $block->getMobileItemCount();
+$sliderAutoPlaySpeed = $block->getSliderAutoplayTiming();
+if ($slidercount > 1) { $isEnableSlider = "owl-carousel owl-theme"; }
+
+if ($slidercount > 0) { ?>
 <div class="main-home-slider_section">
-    <div class="main-home-slider owl-carousel owl-theme">
+    <div class="main-home-slider <?= /* @noEscape */ $isEnableSlider ?>">
         <?php foreach ($collection as $slider) { ?>
-        <div>
-            <div class="main-home-slider-img <?= /* @noEscape */ $slider->getTextPosition();?>"
+            <?php if ($slider->getEnableButton() == 1 && !empty($slider->getTextPosition())) {
+                    $textPosition = $slider->getTextPosition();
+            } else {
+                $textPosition = 'center';
+            } ?>
+            <div class="main-home-slider-img desktop-section-bannerslider <?= /* @noEscape */ $textPosition;?>"
             href="<?= /* @noEscape */ ($slider->getUrlKey()) ? $slider->getUrlKey() : "javascript:void(0)" ?>" <?php if (!empty($slider->getUrlKey())) { ?> target="_blank" <?php } ?>> <?php // phpcs:ignore ?>
-                
-                <picture>
-                    <source media="(min-width: 750px)" srcset="<?= $block->escapeHtml($mediaUrl.$slider->getImagename()) ?>"> <?php // phpcs:ignore ?>
-                    <source media="(max-width: 749px)" srcset="<?php
-                        $imageUrl='';
-                    if (strlen($slider->getMobileimagename())==0) {
-                        $imageUrl=$slider->getImagename();
-                    } else {
-                        $imageUrl=$slider->getMobileimagename();
-                    }
-                    echo $block->escapeHtml($mediaUrl.$imageUrl); ?>">
-                    <img src="<?php
-                            $imageUrl='';
-                    if (strlen($slider->getMobileimagename())==0) {
-                        $imageUrl=$slider->getImagename();
-                    } else {
-                        $imageUrl=$slider->getMobileimagename();
-                    }
-                    $block->escapeHtml($mediaUrl.$imageUrl); ?>" alt="<?= $block->escapeHtml($slider->getTitle()) ?>" title="<?= $block->escapeHtml($slider->getTitle()) ?>" > <?php // phpcs:ignore ?>
-                </picture>
-                <?php
-                    $f=0;
-                if ($slider->getSlidertitle()) {
-                    $f=1;
-                }
-                if ($slider->getButtontitle()) {
-                    $f=1;
-                }
-                if ($f==1) {
-                    ?>
-                <div class="main-home-slider-info" >
-                    <div class="main-home-slider-info-inner">
-                    <?php if ($slider->getSlidertitle()) { ?>
-                        <h3 class="main-home-slider-info-title"><?= $block->escapeHtml($slider->getSlidertitle()) ?></h3> <?php // phpcs:ignore ?>
-                    <?php } ?>
-                    <?php
-                    if ($slider->getButtontitle()) {
-                        if ($slider->getOpenNewTab()=='1') {
-                            ?>
-
-                    <a href="<?= /* @noEscape */ ($slider->getUrlKey()) ? $slider->getUrlKey() : "javascript:void(0)" ?>" <?php if (!empty($slider->getUrlKey())) { ?> target="_blank" <?php } ?> class="main-home-slider-info-button action"><?= $block->escapeHtml($slider->getButtontitle()) ?></a> <?php // phpcs:ignore ?>
-
-                  <?php } else {?>
-
-                    <a href="<?= /* @noEscape */ ($slider->getUrlKey()) ? $slider->getUrlKey() : "javascript:void(0)" ?>" <?php if (!empty($slider->getUrlKey())) { ?>  <?php } ?> class="main-home-slider-info-button action"><?= $block->escapeHtml($slider->getButtontitle()) ?></a> <?php // phpcs:ignore ?>
-              <?php }}?>
-                    </div> 
-                </div>
-            <?php } ?>
+                <img src="<?php echo $block->escapeHtml($mediaUrl.$slider->getImagename()); ?>" alt="<?= $slider->getTitle() ?>" title="<?= $slider->getTitle() ?>"> <?php // phpcs:ignore ?>
+                <?php if (!empty($slider->getSlidertitle()) || $slider->getEnableButton() == 1) { ?>
+                    <div class="main-home-slider-info" >
+                        <div class="main-home-slider-info-inner">
+                            <?php if ($slider->getSlidertitle()) { ?>
+                                <h3 class="main-home-slider-info-title"><?= $slider->getSlidertitle() ?></h3> <?php // phpcs:ignore ?>
+                            <?php } ?>
+                            <?php if ($slider->getEnableButton() == 1) { ?>
+                                <a href="<?= /* @noEscape */ ($slider->getUrlKey()) ? $slider->getUrlKey() : "javascript:void(0)" ?>" <?= /* @noEscape */ ($slider->getOpenNewTab() == 1) ? 'target="_blank"' : "" ?> class="main-home-slider-info-button action" title="<?= /* @noEscape */ $block->escapeHtml($slider->getButtontitle()) ?>"> <?php // phpcs:ignore ?>
+                                    <?= /* @noEscape */ $block->escapeHtml($slider->getButtontitle()) ?>
+                                </a>
+                            <?php } ?>
+                        </div> 
+                    </div>
+                <?php } ?>
             </div>
-        </div>
+            <div class="main-home-slider-img mobile-section-bannerslider <?= /* @noEscape */ $textPosition;?>"
+            href="<?= /* @noEscape */ ($slider->getUrlKey()) ? $slider->getUrlKey() : "javascript:void(0)" ?>" <?php if (!empty($slider->getUrlKey())) { ?> target="_blank" <?php } ?>> <?php // phpcs:ignore ?>
+                <?php
+                    $imageUrl = $imageUrlLink = '';
+                if (!empty($slider->getMobileimagename())) {
+                    $imageUrl = $slider->getMobileimagename();
+                } else {
+                    $imageUrl = $slider->getImagename();
+                }
+                    $imageUrlLink = $block->escapeHtml($mediaUrl.$imageUrl);
+                ?>
+                <img src="<?= $imageUrlLink; ?>" alt="<?= $slider->getTitle() ?>" title="<?= $slider->getTitle() ?>"> <?php // phpcs:ignore ?>
+                <?php if (!empty($slider->getSlidertitle()) || $slider->getEnableButton() == 1) { ?>
+                    <div class="main-home-slider-info" >
+                        <div class="main-home-slider-info-inner">
+                            <?php if (!empty($slider->getSlidertitle()) || !empty($slider->getMobilesliderTitle())) { ?>
+                                <?php if (!empty($slider->getMobilesliderTitle())) {
+                                    $sliderTitle = $slider->getMobilesliderTitle();
+                                } else {
+                                    $sliderTitle = $slider->getSlidertitle();
+                                } ?>
+                                <h3 class="main-home-slider-info-title"><?= /* @noEscape */ $sliderTitle ?></h3>
+                            <?php } ?>
+                            <?php if ($slider->getEnableButton() == 1) { ?>
+                                <a href="<?= /* @noEscape */ ($slider->getUrlKey()) ? $slider->getUrlKey() : "javascript:void(0)" ?>" <?= /* @noEscape */ ($slider->getOpenNewTab() == 1) ? 'target="_blank"' : "" ?> class="main-home-slider-info-button action" title="<?= /* @noEscape */ $block->escapeHtml($slider->getButtontitle()) ?>"> <?php // phpcs:ignore ?>
+                                    <?= /* @noEscape */ $block->escapeHtml($slider->getButtontitle()) ?>
+                                </a>
+                            <?php } ?>
+                        </div> 
+                    </div>
+                <?php } ?>
+            </div>
         <?php } ?>
     </div>
 </div>
-
-    <?php
-    $autoPlayspeed=7000;
-    if (strlen($block->getSystemConfig('bannerslider/slider/autoplay_timing'))>0) {
-        $autoPlayspeed=$block->getSystemConfig('bannerslider/slider/autoplay_timing');
-    }
-
-    $direction='false';
-    if ($block->getSystemConfig('announcementbar/slider/text_direction')=='left-to-right') {
-        $direction='true';
-    }
-    ?>
-
-
-
-<script>
-    require(["jquery","navigate/bannerslider/owl.carousel"],function($) {
-        $('.main-home-slider').css('display', "block").owlCarousel({
-            loop: <?= /* @noEscape */ $block->getSystemConfig('bannerslider/slider/infinite'); ?>,
-            responsiveClass:true,
-            dots:<?= /* @noEscape */ $block->getSystemConfig('bannerslider/slider/show_dots'); ?>,
-            autoplay: <?= /* @noEscape */ $block->getSystemConfig('bannerslider/slider/autoplay'); ?>,
-            autoplayTimeout: <?= /* @noEscape */ $autoPlayspeed;?>,
-            nav:<?= /* @noEscape */ $block->getSystemConfig('bannerslider/slider/show_arrow'); ?>,
-            responsive : {
-                0:{
-                    nav:false,
-                    items:<?= /* @noEscape */ $block->getSystemConfig('bannerslider/slider/item_mobile'); ?>
-                },
-                768:{
-                    nav:<?= /* @noEscape */ $block->getSystemConfig('bannerslider/slider/show_arrow'); ?>,
-                    items:<?= /* @noEscape */ $block->getSystemConfig('bannerslider/slider/item_desktop'); ?>
-                }
-            }
-        });
-         window.dispatchEvent(new Event('resize'));
-    });
-</script>
-<?php } else { ?>
-<div class="message info empty">
-    <div><?= /* @escapeNotVerified */ $block->escapeHtml(__('We can\'t find banner slider matching the selection.')) ?></div> <?php // phpcs:ignore ?>
-</div>
 <?php } ?>
+<?php
+    $bannerSliderConfig = [];
+    $bannerSliderConfig['bannerSlider_infinite']    = $sliderLoop;
+    $bannerSliderConfig['bannerSlider_showDots']    = $sliderDots;
+    $bannerSliderConfig['bannerSlider_autoplay']    = $sliderAutoplay;
+    $bannerSliderConfig['bannerSlider_showArrow']   = $sliderArrow;
+    $bannerSliderConfig['bannerSlider_itemMobile']  = $sliderMobileItem;
+    $bannerSliderConfig['bannerSlider_itemDesktop'] = $sliderDesktopItem;
+    $bannerSliderConfig['bannerSlider_items']       = $slidercount;
+    $bannerSliderConfig['bannerSlider_autoplayTimeout'] = $sliderAutoPlaySpeed;
+?>
+<script>
+    window.bannerSliderData = <?= /* @noEscape */ json_encode($bannerSliderConfig); ?>;
+</script>
