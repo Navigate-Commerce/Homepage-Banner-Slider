@@ -10,9 +10,6 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
-        <tab id="navigate" translate="Navigate Extensions" sortOrder="100" class="navigate-extensions">
-            <label>Navigate Extensions</label>
-        </tab>
         <section id="bannerslider" showInDefault="1" showInWebsite="1" showInStore="1" type="text" translate="Bannerslider Information" sortOrder="200">
             <label>Homepage Banner Slider</label>
             <tab>navigate</tab>
