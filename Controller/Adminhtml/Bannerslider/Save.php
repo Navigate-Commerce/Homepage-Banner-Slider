@@ -22,7 +22,7 @@ class Save extends \Magento\Backend\App\Action
     /**
      * @var boolean
      */
-    protected $resultPageFactory = false;
+    protected $_resultFactory;
 
     /**
      * @var File

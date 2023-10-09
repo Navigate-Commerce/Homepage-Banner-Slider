@@ -18,14 +18,14 @@ use Navigate\HomepageBannerSlider\Model\BannersliderFactory;
 class Edit extends \Magento\Backend\App\Action
 {
     /**
-     * @var boolean
-     */
-    protected $resultPageFactory = false;
-
-    /**
      * @var Registry
      */
-    protected $registry;
+    protected $_coreRegistry;
+
+    /**
+     * @var PageFactory
+     */
+    protected $resultPageFactory;
 
     /**
      * @var BannersliderFactory
